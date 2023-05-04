@@ -52,12 +52,39 @@ function deal() {
   let hand: string[] = [card_1.toString(), card_2.toString()];                           // compounds cards into 'hand' array
   let dealer_hand_initial: string[] = [dealer_card_1.toString(), dealer_card_2.toString()];
 
+  let isHandBlackjack: boolean = blackjackChecker(hand);
+
   console.log("card_1: " + card_1);
   console.log("dealer_card_1: " + dealer_card_1);
   console.log("card_2: " + card_2);
   console.log("dealer_card_2: " + dealer_card_2);
   console.log("hand: " + hand);
   console.log("dealer_hand_initial: " + dealer_hand_initial);
+  console.log("isHandBlackjack: " + isHandBlackjack);
+}
+
+
+function blackjackChecker(hand: string[]): boolean {
+  let aceCounter: number = 0;   // aceCounter is for A
+  let faceCounter: number = 0;  // faceCounter is for K, Q, J, 10
+  for (let card of hand) {
+      let char1 = card.substring(0, 1);
+      if (char1 === "A") {
+          aceCounter = aceCounter + 1;
+      } else if (char1 === "1") { // if statement checks for value of 10 (2 chars)
+          let char2 = card.substring(1, 2);
+          if (char2 === "0") { // if char1=1 & char2=0, our value is 10
+              faceCounter = faceCounter + 1;
+          }
+      } else if (char1 === "K" || char1 === "Q" || char1 === "J") {
+          faceCounter = faceCounter + 1;
+      }
+  }
+  if (aceCounter == 1 && faceCounter == 1) {
+      return true; // blackjack :)
+  } else {
+      return false; // not blackjack :(
+  }
 }
 
 // game initialization call will go here
