@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
 
-type PlayerStatus = 'Bust' | 'Stand' | 'Blackjack'; 
-
 function App() {
   return (
     <div className="app-root">
@@ -33,20 +31,20 @@ async function round_start() {
   console.log("Welcome to SmartContract Blackjack (Powered by Chainlink VRF)");
 
   // deal
-  var player_hand: string[] = await deal().hand;
+  let player_hand: string[] = [];
+  player_hand = await deal().hand;
   var dealer_hand: string[] = deal().dealer_hand_initial;
   var player_has_blackjack: boolean = deal().isHandBlackjack;
-  var deck: string[] = deal().deck;
+  var deck: string[] | undefined = deal().deck;  // logically, there's no situation where deck == undefined
 
   // choose
-  var player_status: PlayerStatus = await choose(player_hand, deck).playerStatus;
-  var player_score: number = choose(player_hand, deck).player_score;
-  deck = choose(player_hand, deck).deck;
-
-
+  var player_status = await choose(player_hand, deck)?.playerStatus; // 'Bust' || 'Blackjack' || 'Stand'
+  var player_score = choose(player_hand, deck)?.player_score;
+  deck = choose(player_hand, deck)?.deck;
 
   console.log("player_status: " + player_status);
   console.log("player_score: " + player_score);
+  console.log("deck: " + deck);
 
   console.log("Game Over.");
 }
@@ -127,7 +125,7 @@ function choose(player_hand: string[], deck: string[]) {           // results in
   console.log("(1) Hit");
   console.log("(2) Stand");                         
 
-  let playerStatus: PlayerStatus;
+  let playerStatus: string;
   let player_choice: number = 2; // dummy value until we implement user input UI in html
   
 
@@ -153,15 +151,18 @@ function choose(player_hand: string[], deck: string[]) {           // results in
     let player_score = eval_score(player_hand);
     playerStatus = 'Stand';
     return { playerStatus, player_score, deck };
+  } else {
+    console.log("Invalid input. Please try again.\n");
+    choose(player_hand, deck);                   // loops back to choose until STAND or BUST
   }
 }
 
 function checkBust(player_hand: string[]): [boolean, number] {
-  // returns [is_bust, player_score]
+  return [false, 0]; // dummy value until we implement checkBust
 }
 
 function eval_score(player_hand: string[]): number {
-  // returns player_score
+  return 0; // dummy value until we implement eval_score
 }
 
 round_start()
