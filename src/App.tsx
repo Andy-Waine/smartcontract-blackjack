@@ -1,6 +1,23 @@
 import React from 'react';
 import './App.css';
 
+// global variable(s)
+var deck: string[] = [
+  "A\u{2660}", "A\u{2666}", "A\u{2663}", "A\u{2665}",
+  "K\u{2660}", "K\u{2666}", "K\u{2663}", "K\u{2665}",
+  "Q\u{2660}", "Q\u{2666}", "Q\u{2663}", "Q\u{2665}",
+  "J\u{2660}", "J\u{2666}", "J\u{2663}", "J\u{2665}",
+  "10\u{2660}", "10\u{2666}", "10\u{2663}", "10\u{2665}",
+  "9\u{2660}", "9\u{2666}", "9\u{2663}", "9\u{2665}",
+  "8\u{2660}", "8\u{2666}", "8\u{2663}", "8\u{2665}",
+  "7\u{2660}", "7\u{2666}", "7\u{2663}", "7\u{2665}",
+  "6\u{2660}", "6\u{2666}", "6\u{2663}", "6\u{2665}",
+  "5\u{2660}", "5\u{2666}", "5\u{2663}", "5\u{2665}",
+  "4\u{2660}", "4\u{2666}", "4\u{2663}", "4\u{2665}",
+  "3\u{2660}", "3\u{2666}", "3\u{2663}", "3\u{2665}",
+  "2\u{2660}", "2\u{2666}", "2\u{2663}", "2\u{2665}",
+];
+
 function App() {
   return (
     <div className="app-root">
@@ -28,64 +45,45 @@ function App() {
 }
 
 async function round_start() {
-  console.log("Welcome to SmartContract Blackjack (Powered by Chainlink VRF)");
+  console.log("New Round!");
 
-  // deal
-  let player_hand: string[] = [];
-  player_hand = await deal().hand;
-  var dealer_hand: string[] = deal().dealer_hand_initial;
-  var player_has_blackjack: boolean = deal().isHandBlackjack;
-  var deck: string[] | undefined = deal().deck;  // logically, there's no situation where deck == undefined
+  // dealer deals
+  var { player_hand, dealer_hand, isHandBlackjack } = await deal();
 
-  // choose
-  var player_status = await choose(player_hand, deck)?.playerStatus; // 'Bust' || 'Blackjack' || 'Stand'
-  var player_score = choose(player_hand, deck)?.player_score;
-  deck = choose(player_hand, deck)?.deck;
-
-  console.log("player_status: " + player_status);
-  console.log("player_score: " + player_score);
-  console.log("deck: " + deck);
+  // player chooses
+  var { player_status, player_score }= await choose(player_hand); // 'Bust' || 'Blackjack' || 'Stand'
 
   console.log("Game Over.");
+  console.log("player_hand: " + player_hand);
+  console.log("player_status: " + player_status);
+  console.log("player_score: " + player_score);
+  console.log("dealer_hand: " + dealer_hand);
+  console.log("isHandBlackjack: " + isHandBlackjack);
+  console.log("deck: " + deck);
 }
 
 function deal() {
-  console.log("Dealing cards...")
-  var deck: string[] = [
-    "A\u{2660}", "A\u{2666}", "A\u{2663}", "A\u{2665}",
-    "K\u{2660}", "K\u{2666}", "K\u{2663}", "K\u{2665}",
-    "Q\u{2660}", "Q\u{2666}", "Q\u{2663}", "Q\u{2665}",
-    "J\u{2660}", "J\u{2666}", "J\u{2663}", "J\u{2665}",
-    "10\u{2660}", "10\u{2666}", "10\u{2663}", "10\u{2665}",
-    "9\u{2660}", "9\u{2666}", "9\u{2663}", "9\u{2665}",
-    "8\u{2660}", "8\u{2666}", "8\u{2663}", "8\u{2665}",
-    "7\u{2660}", "7\u{2666}", "7\u{2663}", "7\u{2665}",
-    "6\u{2660}", "6\u{2666}", "6\u{2663}", "6\u{2665}",
-    "5\u{2660}", "5\u{2666}", "5\u{2663}", "5\u{2665}",
-    "4\u{2660}", "4\u{2666}", "4\u{2663}", "4\u{2665}",
-    "3\u{2660}", "3\u{2666}", "3\u{2663}", "3\u{2665}",
-    "2\u{2660}", "2\u{2666}", "2\u{2663}", "2\u{2665}",
-  ];
+  console.log("Dealing cards...");
   // ALL Randomization to be Replaced by Chainlink VRF
   let card_1: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0];           // selects random card from deck for player
   let dealer_card_1: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0];   // selects random card from deck for dealer
   let card_2: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0];         // selects random card from deck for player
   let dealer_card_2: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0]; // selects random card from deck for dealer
   
-  var hand: string[] = [card_1.toString(), card_2.toString()];                          // compounds cards into 'hand' array
-  var dealer_hand_initial: string[] = [dealer_card_1.toString(), dealer_card_2.toString()];
+  var player_hand: string[] = [card_1.toString(), card_2.toString()];                          // compounds cards into 'hand' array
+  var dealer_hand: string[] = [dealer_card_1.toString(), dealer_card_2.toString()];
 
-  var isHandBlackjack: boolean = blackjackChecker(hand);
+  var isHandBlackjack: boolean = blackjackChecker(player_hand);
 
   console.log("card_1: " + card_1);
   console.log("dealer_card_1: " + dealer_card_1);
   console.log("card_2: " + card_2);
   console.log("dealer_card_2: " + dealer_card_2);
-  console.log("hand: " + hand);
-  console.log("dealer_hand_initial: " + dealer_hand_initial);
+  console.log("player_hand: " + player_hand);
+  console.log("dealer_hand: " + dealer_hand);
   console.log("isHandBlackjack: " + isHandBlackjack);
 
-  return { hand, dealer_hand_initial, isHandBlackjack, deck };
+  return { player_hand, dealer_hand, isHandBlackjack };
 }
 
 
@@ -115,9 +113,8 @@ function blackjackChecker(hand: string[]): boolean {
 /*
     Returns PlayerStatus,
             player_score,
-            deck
 */
-function choose(player_hand: string[], deck: string[]) {           // results in Bust or Stand PlayerStatus
+function choose(player_hand: string[]) {           // results in Bust or Stand PlayerStatus
     
   console.log("Your Hand: "); 
   console.log(player_hand);
@@ -125,8 +122,10 @@ function choose(player_hand: string[], deck: string[]) {           // results in
   console.log("(1) Hit");
   console.log("(2) Stand");                         
 
-  let playerStatus: string;
+  // declarations (w/ dummy values)
+  let player_status: string = 'Stand'; // dummy value until user choice is made
   let player_choice: number = 2; // dummy value until we implement user input UI in html
+  let player_score: number = 0; // dummy value until score is evaluated
   
 
   if (player_choice == 1) {                       // (1) HIT
@@ -141,20 +140,16 @@ function choose(player_hand: string[], deck: string[]) {           // results in
 
     if (is_bust === true) {
         console.log(player_hand, " | Uh-oh, You BUST!\n");
-        playerStatus = 'Bust';
-        return { playerStatus, player_score, deck };
+        player_status = 'Bust';
     } else {
-        choose(player_hand, deck);                         // loops back to choose until STAND or BUST
+        choose(player_hand);                         // loops back to choose until STAND or BUST
     }                            
   } else if (player_choice == 2) {               // (2) STAND
     console.log("You choose to stand.\n");
-    let player_score = eval_score(player_hand);
-    playerStatus = 'Stand';
-    return { playerStatus, player_score, deck };
-  } else {
-    console.log("Invalid input. Please try again.\n");
-    choose(player_hand, deck);                   // loops back to choose until STAND or BUST
+    player_score = eval_score(player_hand);
+    player_status = 'Stand';
   }
+  return { player_status, player_score };
 }
 
 function checkBust(player_hand: string[]): [boolean, number] {
