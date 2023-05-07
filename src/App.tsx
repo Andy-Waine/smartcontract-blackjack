@@ -153,7 +153,14 @@ function choose(player_hand: string[]) {           // results in Bust or Stand P
 }
 
 function checkBust(player_hand: string[]): [boolean, number] {
-  return [false, 0]; // dummy value until we implement checkBust
+  let is_bust: boolean = false; // default value
+  let player_score: number = eval_score(player_hand);
+  if (player_score > 21) {
+    is_bust = true;
+  } else {
+    is_bust = false;
+  }
+  return [is_bust, player_score];
 }
 
 function eval_score(player_hand: string[]): number {
