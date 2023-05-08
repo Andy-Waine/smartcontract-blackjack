@@ -51,7 +51,10 @@ async function round_start() {
   var { player_hand, dealer_hand, isHandBlackjack } = await deal();
 
   // player chooses
-  var { player_status, player_score }= await choose(player_hand); // 'Bust' || 'Blackjack' || 'Stand'
+  var { player_status, player_score }= await choose(player_hand); // player_status: 'Bust' || 'Blackjack' || 'Stand'
+
+  // dealer's turn
+  var { dealer_status, dealer_score } = await dealersTurn(dealer_hand);
 
   console.log("Game Over.");
   console.log("player_hand: " + player_hand);
@@ -59,6 +62,8 @@ async function round_start() {
   console.log("player_score: " + player_score);
   console.log("dealer_hand: " + dealer_hand);
   console.log("isHandBlackjack: " + isHandBlackjack);
+  console.log("dealer_status: " + dealer_status);
+  console.log("dealer_score: " + dealer_score);
   console.log("deck: " + deck);
 }
 
@@ -202,6 +207,33 @@ function eval_score(player_hand: string[]): number {
     }
     console.log("Total Score from eval_score: " + totalScore);
     return totalScore;
+}
+
+
+function dealersTurn(dealerHand: string[]) {
+  console.log('The Dealer reveals their initial draw: ', dealerHand);
+  let isBlackjack = blackjackChecker(dealerHand);
+  let dealer_score = eval_score(dealerHand); //initial score evaluation
+  let dealer_status: string;
+  while (dealer_score <= 16) {
+    let dealerDraw: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0]; // Randomization to be Replaced by Chainlink VRF
+    console.log('The Dealer draws another card: ', dealerDraw);
+    dealerHand.push(dealerDraw.toString());
+    dealer_score = eval_score(dealerHand);
+  }
+  if (dealer_score > 21) {
+    console.log('The Dealer BUSTS with the following hand: ', dealerHand);
+    dealer_status = 'Bust';
+    return { dealer_status, dealer_score };
+  } else if (isBlackjack == true) {
+    console.log('The Dealer STANDS with a BLACKJACK: ', dealerHand);
+    dealer_status = 'Blackjack';
+    return { dealer_status, dealer_score };
+  } else {
+    console.log('The Dealer STANDS with the following hand: ', dealerHand);
+    dealer_status = 'Stand';
+    return { dealer_status, dealer_score };
+  }
 }
 
 round_start()
