@@ -50,11 +50,19 @@ async function round_start() {
   // dealer deals
   var { player_hand, dealer_hand, isHandBlackjack } = await deal();
 
-  // player chooses
-  var { player_status, player_score }= await choose(player_hand); // player_status: 'Bust' || 'Blackjack' || 'Stand'
+  // player's turn
+    // player_status: 'Bust' || 'Blackjack' || 'Stand'
+  var { player_status, player_score }= await playersTurn(player_hand); 
 
   // dealer's turn
+    // dealer_status: 'Bust' || 'Blackjack' || 'Stand'
   var { dealer_status, dealer_score } = await dealersTurn(dealer_hand);
+
+  // determine round result
+    // round_result: 'Win' || 'Blackjack' || 'Loss' || 'Push'
+  var round_result = await determineResult(player_status, player_score, dealer_status, dealer_score);
+
+  // NOTE: the round_result will be fed into the smart contract
 
   console.log("Game Over.");
   console.log("player_hand: " + player_hand);
@@ -64,6 +72,7 @@ async function round_start() {
   console.log("isHandBlackjack: " + isHandBlackjack);
   console.log("dealer_status: " + dealer_status);
   console.log("dealer_score: " + dealer_score);
+  console.log("round_result: " + round_result);
   console.log("deck: " + deck);
 }
 
@@ -90,7 +99,6 @@ function deal() {
 
   return { player_hand, dealer_hand, isHandBlackjack };
 }
-
 
 function blackjackChecker(hand: string[]): boolean {
   let aceCounter: number = 0;   // aceCounter is for A
@@ -119,7 +127,7 @@ function blackjackChecker(hand: string[]): boolean {
     Returns PlayerStatus,
             player_score,
 */
-function choose(player_hand: string[]) {           // results in Bust or Stand PlayerStatus
+function playersTurn(player_hand: string[]) {           // results in Bust or Stand PlayerStatus
     
   console.log("Your Hand: "); 
   console.log(player_hand);
@@ -147,7 +155,7 @@ function choose(player_hand: string[]) {           // results in Bust or Stand P
         console.log(player_hand, " | Uh-oh, You BUST!\n");
         player_status = 'Bust';
     } else {
-        choose(player_hand);                         // loops back to choose until STAND or BUST
+        playersTurn(player_hand);                   // loops back to choose until STAND or BUST
     }                            
   } else if (player_choice === 2) {               // (2) STAND
     console.log("You choose to stand.\n");
@@ -209,7 +217,6 @@ function eval_score(player_hand: string[]): number {
     return totalScore;
 }
 
-
 function dealersTurn(dealerHand: string[]) {
   console.log('The Dealer reveals their initial draw: ', dealerHand);
   let isBlackjack = blackjackChecker(dealerHand);
@@ -233,6 +240,48 @@ function dealersTurn(dealerHand: string[]) {
     console.log('The Dealer STANDS with the following hand: ', dealerHand);
     dealer_status = 'Stand';
     return { dealer_status, dealer_score };
+  }
+}
+
+function determineResult(playerStatus: String, playerScore: number, dealerStatus: String, dealerScore: number) {
+  var round_result: String; // 'Win' || 'Blackjack' || 'Loss' || 'Push'
+
+  const winMessage = "!!!   You WIN :)   !!!";
+  const loseMessage = "!!!   You LOSE :(   !!!";
+  const pushMessage = "!!!   PUSH :|   !!!";
+  const blackjackMessage = "!!! NICE BLACKJACK !!!";
+
+
+  if (playerStatus === 'Stand' && dealerStatus === 'Stand') {
+    if (playerScore > dealerScore) {
+        console.log(winMessage);
+    } else {
+        console.log(loseMessage);
+    }
+  } else if (playerStatus === 'Stand' && dealerStatus === 'Bust') {
+      console.log(winMessage);
+      return round_result = 'Win';
+  } else if (playerStatus === 'Blackjack' && dealerStatus === 'Bust') {
+      console.log(winMessage, blackjackMessage);
+      return round_result = 'Blackjack';
+  } else if (playerStatus === 'Blackjack' && dealerStatus === 'Stand') {
+      console.log(winMessage, blackjackMessage);
+      return round_result = 'Blackjack';
+  } else if (playerStatus === 'Bust' && dealerStatus === 'Stand') {
+      console.log(loseMessage);
+      return round_result = 'Loss';
+  } else if (playerStatus === 'Bust' && dealerStatus === 'Blackjack') {
+      console.log(loseMessage);
+      return round_result = 'Loss';
+  } else if (playerStatus === 'Stand' && dealerStatus === 'Blackjack') {
+      console.log(loseMessage);
+      return round_result = 'Loss';
+  } else if (playerStatus === 'Blackjack' && dealerStatus === 'Blackjack') {
+      console.log(pushMessage);
+      return round_result = 'Push';
+  } else if (playerStatus === 'Bust' && dealerStatus === 'Bust') {
+      console.log(pushMessage);
+      return round_result = 'Push';
   }
 }
 
