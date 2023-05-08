@@ -103,7 +103,7 @@ function blackjackChecker(hand: string[]): boolean {
         faceCounter = faceCounter + 1;
     }
   }
-  if (aceCounter == 1 && faceCounter == 1) {
+  if (aceCounter === 1 && faceCounter === 1) {
     return true; // blackjack :)
   } else {
     return false; // not blackjack :(
@@ -118,7 +118,7 @@ function choose(player_hand: string[]) {           // results in Bust or Stand P
     
   console.log("Your Hand: "); 
   console.log(player_hand);
-  console.log("How would you like to proceed?");
+  console.log("How would you like to proceed?"); // HERE IS WHERE WE NEED AN EVENT LISTENER
   console.log("(1) Hit");
   console.log("(2) Stand");                         
 
@@ -128,7 +128,7 @@ function choose(player_hand: string[]) {           // results in Bust or Stand P
   let player_score: number = 0; // dummy value until score is evaluated
   
 
-  if (player_choice == 1) {                       // (1) HIT
+  if (player_choice === 1) {                       // (1) HIT
     console.log("You choose to hit.\n");
 
     // a new card is drawn from the deck and added to the player's hand
@@ -144,7 +144,7 @@ function choose(player_hand: string[]) {           // results in Bust or Stand P
     } else {
         choose(player_hand);                         // loops back to choose until STAND or BUST
     }                            
-  } else if (player_choice == 2) {               // (2) STAND
+  } else if (player_choice === 2) {               // (2) STAND
     console.log("You choose to stand.\n");
     player_score = eval_score(player_hand);
     player_status = 'Stand';
@@ -164,7 +164,44 @@ function checkBust(player_hand: string[]): [boolean, number] {
 }
 
 function eval_score(player_hand: string[]): number {
-  return 0; // dummy value until we implement eval_score
+  let totalScore: number = 0;                                    // 0 placeholder
+    let valsToEval: string[] = [];
+    for (let card of player_hand) {
+        let char1 = card.substring(0, 1);
+        if (char1 === "1") {                                        // if statement checks for value of 10 (2 chars)
+            let char2 = card.substring(1, 2);
+            if (char2 === "0") {                                  // If char1=1 & char2=0, our value is 10
+                let char10 = card.substring(0, 2);
+                valsToEval.push(char10);     // true if value is 10
+            } else {
+                valsToEval.push(char1);     // true if value is 1
+            }
+        } else {
+            valsToEval.push(char1);     // true if value is NOT 1 or 10
+        }
+    }
+    for (let cardValue of valsToEval) {
+        let cardScore: number;
+        if (cardValue === "K" || cardValue === "Q" || cardValue === "J" || cardValue === "10") {
+            cardScore = 10;
+        } else if (cardValue !== "A") {
+            cardScore = +cardValue;
+        } else {
+            cardScore = 11;
+        }
+        totalScore = totalScore + cardScore;
+    }
+
+    let numAces = valsToEval.filter(x => x === "A").length;              
+    if (numAces > 0) {
+        for (let i = 0; i < numAces; i++) {
+            if (totalScore > 21) {
+                totalScore -= 10;
+            }                                    // accounts for situations in which aces are converted from 11 to 1
+        }
+    }
+    console.log("Total Score from eval_score: " + totalScore);
+    return totalScore;
 }
 
 round_start()
