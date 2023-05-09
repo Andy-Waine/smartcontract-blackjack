@@ -23,10 +23,13 @@ function App() {
   return (
     <div className="app-root">
       {/* New Game button for testing only, to be removed */}
-      <Button variant="contained" onClick={round_start}>
-        New Game
-      </Button>
-      <div className="container">
+      <div className='row match-bg'>
+        <Button variant="contained" className='button-hit' onClick={round_start}>
+          New Game
+        </Button>
+      </div>
+
+      <div className="container z-index-0">
           <div className="row">
               <div className="col-2 col-options col-border-right">
                   <div className="row row-header">
@@ -44,7 +47,7 @@ function App() {
                       <div className="col-3 col-options"></div>
                       <div className="col-6 col-options">
                           <div className="row row-player-hand" id="player-hand">
-
+                  
                           </div>
                           <div className="row row-player-choices">
                             <div className="col-2 col-options col-choice-button"></div>
