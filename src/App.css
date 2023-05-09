@@ -82,10 +82,21 @@ html {
 }
 
 .row-player-hand {
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(55,91,210,1) inset; /* CLBLUE */
+    height: 80%;
+}
+
+.row-player-hand-fill {
     background-color: #DFE7FB;   /* Lavender (background) */
     border-radius: 10px;
-    box-shadow: 0px 0px 5px rgba(55,91,210,.4) inset; /* CLBLUE */
-    height: 80%
+    height: 100%;
+    width: 100%;
+    opacity: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .row-player-choices {
@@ -113,11 +124,11 @@ html {
     color: #375BD2 !important;
 }
 
-.z-index-negative-10 {
+.z-index-neg-10 {
     z-index: -10;
 }
 
-.z-index-negative-1 {
+.z-index-neg-1 {
     z-index: -1;
 }
 
