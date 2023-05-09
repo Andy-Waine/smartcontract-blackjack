@@ -5,15 +5,25 @@
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 @import "https://unpkg.com/@material-ui/core@latest/umd/material-ui.min.css";
 
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100&display=swap');
+
+
 /* 
 COLORS
-#DFE7FB rgba(223,231,251)   | Lavender (background)
-#a0b3f2 rgba(160,179,242,1) | Perano (borders)
-#375BD2 rgba(55,91,210,1)   | CLBlue (Hit Button/Card Row Border)
+    #DFE7FB rgba(223,231,251)   | Lavender (background)
+    #a0b3f2 rgba(160,179,242,1) | Perano (borders)
+    #375BD2 rgba(55,91,210,1)   | CLBlue (Hit Button/Card Row Border)
+    #1a2b6b rgba(26,43,107,1)   | Biscay (Text)
 */
 
 html {
     background-color: #DFE7FB; /* Lavender (background) */
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    color: #1a2b6b; /* Biscay (Text) */
 }
 
 .match-bg {

@@ -41,7 +41,7 @@ function App() {
                       <h5>Main Table Header</h5>
                   </div>
                   <div className="row row-body">
-                      <h6>Playing Field</h6>
+                      <h6>Dealer Field</h6>
                   </div>
                   <div className="row row-footer">
                       <div className="col-3 col-options"></div>
@@ -346,7 +346,10 @@ function generatePlayerHand(player_hand : string[]) {
   card1.style.float = 'left';
   card1.style.zIndex = '1';
   card1.style.marginTop = '5px';
+  card1.style.paddingLeft = '5px';
   card1.style.position = 'relative';
+  card1.style.fontWeight = '600';
+  card1.style.left = '15%';
   // Add the first string from the player_hand array as text content to the card1 div
   card1.textContent = player_hand[0];
 
@@ -362,7 +365,9 @@ function generatePlayerHand(player_hand : string[]) {
   card2.style.zIndex = '2';
   card2.style.float = 'left';
   card2.style.marginTop = '5px';
+  card1.style.paddingLeft = '5px';
   card2.style.position = 'relative';
+  card2.style.fontWeight = '600';
   card2.style.left = '-15%';
   // Add the second string from the player_hand array as text content to the card2 div
   card2.textContent = player_hand[1];
