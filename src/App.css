@@ -5,8 +5,15 @@
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 @import "https://unpkg.com/@material-ui/core@latest/umd/material-ui.min.css";
 
+/* 
+COLORS
+#DFE7FB rgba(223,231,251)   | Lavender (background)
+#a0b3f2 rgba(160,179,242,1) | Perano (borders)
+#375BD2 rgba(55,91,210,1)   | CLBlue (Hit Button/Card Row Border)
+*/
+
 html {
-    background-color: aliceblue;
+    background-color: #DFE7FB; /* Lavender (background) */
 }
 
 .container {
@@ -25,6 +32,7 @@ html {
     height: 55%;
     background-color: white;
     margin: auto;
+    box-shadow: 0px 0px 5px rgba(160,179,242,.8); /* Perano (borders) */
 }
 .row {
     margin: 0;
@@ -45,7 +53,7 @@ html {
 }
 
 .col-border-right {
-    border-right: 1px solid #a3c0ff;
+    border-right: 1px solid #a0b3f2; /* Perano (borders) */
 }
 
 .row-header {
@@ -57,14 +65,49 @@ html {
 
 .row-body {
     min-width: 100%;
-    max-height: 60%;
+    max-height: 50%;
     justify-content: center;
     align-items: center;
 }
 
 .row-footer {
     min-width: 100%;
-    max-height: 30%;
+    max-height: 40%;
     justify-content: center;
     align-items: center;
 }
+
+.row-player-hand {
+    background-color: #DFE7FB;   /* Lavender (background) */
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(55,91,210,.4) inset; /* CLBLUE */
+    height: 80%
+}
+
+.row-player-choices {
+    height: 20%;
+    position: relative;
+}
+
+.col-choice-button {
+    top: -50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+
+.button-hit {
+    width: 100px;
+    background-color: #375BD2 !important;
+}
+
+.button-stand {
+    width: 100px;
+    background-color: white !important;
+    border: 1px solid #375BD2 !important;
+    color: #375BD2 !important;
+}
+
+/* removes black border that appears after MUI buttons are clicked */
+button:focus { outline: none !important;;}

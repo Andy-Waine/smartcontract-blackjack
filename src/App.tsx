@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { Button } from '@mui/material'
 
 // global variable(s)
 var deck: string[] = [
@@ -37,7 +38,27 @@ function App() {
                   </div>
                   <div className="row row-footer">
                       <div className="col-3 col-options"></div>
-                      <div className="col-6 col-options"></div>
+                      <div className="col-6 col-options">
+                          <div className="row row-player-hand">
+
+                          </div>
+                          <div className="row row-player-choices">
+                            <div className="col-2 col-options col-choice-button"></div>
+                            <div className="col-4 col-options col-choice-button">
+                              <Button variant="contained" className="button-hit">
+                                Hit
+                              </Button>
+                            </div>
+                            <div className="col-4 col-options col-choice-button">
+                              <Button variant="outlined" className="button-stand">
+                                Stand
+                              </Button>
+                            </div>
+                            <div className="col-2 col-options col-choice-button"></div>
+
+
+                          </div>
+                      </div>
                       <div className="col-3 col-options"></div>
                   </div>
               </div>
