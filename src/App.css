@@ -60,6 +60,10 @@ html {
     border-right: 1px solid #a0b3f2; /* Perano (borders) */
 }
 
+.col-hand {
+    max-width: fit-content;
+}
+
 .row-header {
     min-width: 100%;
     max-height: 10%;
@@ -86,6 +90,7 @@ html {
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(55,91,210,1) inset; /* CLBLUE */
     height: 80%;
+    justify-content: center;
 }
 
 .row-player-hand-fill {
@@ -96,7 +101,6 @@ html {
     opacity: 80%;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .row-player-choices {

@@ -47,8 +47,10 @@ function App() {
                       <div className="col-3 col-options"></div>
                       <div className="col-6 col-options">
                           <div className="row row-player-hand z-index-10">
-                            <span className="row-player-hand-fill z-index-0" id="player-hand">
+                            <span className="row-player-hand-fill z-index-0">
+                              <div className="col col-hand" id="player-hand">
 
+                              </div>
                             </span>
                           </div>
                           <div className="row row-player-choices">
@@ -217,13 +219,13 @@ function checkBust(player_hand: string[]): [boolean, number] {
 }
 
 function eval_score(player_hand: string[]): number {
-  let totalScore: number = 0;                                    // 0 placeholder
+  let totalScore: number = 0;                       // 0 placeholder
     let valsToEval: string[] = [];
     for (let card of player_hand) {
         let char1 = card.substring(0, 1);
-        if (char1 === "1") {                                        // if statement checks for value of 10 (2 chars)
+        if (char1 === "1") {                     // if statement checks for value of 10 (2 chars)
             let char2 = card.substring(1, 2);
-            if (char2 === "0") {                                  // If char1=1 & char2=0, our value is 10
+            if (char2 === "0") {               // If char1=1 & char2=0, our value is 10
                 let char10 = card.substring(0, 2);
                 valsToEval.push(char10);     // true if value is 10
             } else {
@@ -248,9 +250,9 @@ function eval_score(player_hand: string[]): number {
     let numAces = valsToEval.filter(x => x === "A").length;              
     if (numAces > 0) {
         for (let i = 0; i < numAces; i++) {
-            if (totalScore > 21) {
-                totalScore -= 10;
-            }                                    // accounts for situations in which aces are converted from 11 to 1
+            if (totalScore > 21) { // if hand has ace and score is over 21
+                totalScore -= 10; // ace is converted from 11 to 1
+            }
         }
     }
     console.log("Total Score from eval_score: " + totalScore);
@@ -335,7 +337,7 @@ function generatePlayerHand(player_hand : string[]) {
   var card1 = document.createElement('div');
   card1.style.width = '80px';
   card1.style.minWidth = '80px';
-  card1.style.height = '120px';
+  card1.style.height = '130px';
   card1.style.backgroundColor = 'white';
   card1.style.boxShadow = "0px 0px 10px rgba(55,91,210,1);" /* CLBLUE */
   card1.style.border = '1px solid #a0b3f2'; /* Perano */
@@ -343,21 +345,25 @@ function generatePlayerHand(player_hand : string[]) {
   card1.style.margin = '5px';
   card1.style.float = 'left';
   card1.style.zIndex = '1';
-  card1.style.marginTop = '20px';
+  card1.style.marginTop = '5px';
+  card1.style.position = 'relative';
   // Add the first string from the player_hand array as text content to the card1 div
   card1.textContent = player_hand[0];
 
   var card2 = document.createElement('div');
   card2.style.width = '80px';
   card2.style.minWidth = '80px';
-  card2.style.height = '120px';
+  card2.style.height = '130px';
   card2.style.backgroundColor = 'white';
   card2.style.boxShadow = "0px 0px 10px rgba(55,91,210,1);" /* CLBLUE */
   card2.style.border = '1px solid #a0b3f2'; /* Perano */
   card2.style.borderRadius = '10px';
   card2.style.margin = '5px';
+  card2.style.zIndex = '2';
   card2.style.float = 'left';
-  card2.style.marginTop = '20px';
+  card2.style.marginTop = '5px';
+  card2.style.position = 'relative';
+  card2.style.left = '-15%';
   // Add the second string from the player_hand array as text content to the card2 div
   card2.textContent = player_hand[1];
 
