@@ -22,6 +22,10 @@ var deck: string[] = [
 function App() {
   return (
     <div className="app-root">
+      {/* New Game button for testing only, to be removed */}
+      <Button variant="contained" onClick={round_start}>
+        New Game
+      </Button>
       <div className="container">
           <div className="row">
               <div className="col-2 col-options col-border-right">
@@ -39,7 +43,7 @@ function App() {
                   <div className="row row-footer">
                       <div className="col-3 col-options"></div>
                       <div className="col-6 col-options">
-                          <div className="row row-player-hand">
+                          <div className="row row-player-hand" id="player-hand">
 
                           </div>
                           <div className="row row-player-choices">
@@ -106,7 +110,7 @@ async function round_start() {
   console.log("deck: " + deck);
 }
 
-function deal() {
+async function deal() {
   console.log("Dealing cards...");
   // ALL Randomization to be Replaced by Chainlink VRF
   let card_1: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0];           // selects random card from deck for player
@@ -114,7 +118,8 @@ function deal() {
   let card_2: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0];         // selects random card from deck for player
   let dealer_card_2: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0]; // selects random card from deck for dealer
   
-  var player_hand: string[] = [card_1.toString(), card_2.toString()];                          // compounds cards into 'hand' array
+  var player_hand: string[] = [card_1.toString(), card_2.toString()];                   // compounds cards into 'hand' array
+  await generatePlayerHand(player_hand);                                                     // generates player hand on screen
   var dealer_hand: string[] = [dealer_card_1.toString(), dealer_card_2.toString()];
 
   var isHandBlackjack: boolean = blackjackChecker(player_hand);
@@ -285,8 +290,10 @@ function determineResult(playerStatus: String, playerScore: number, dealerStatus
   if (playerStatus === 'Stand' && dealerStatus === 'Stand') {
     if (playerScore > dealerScore) {
         console.log(winMessage);
+        return round_result = 'Win';
     } else {
         console.log(loseMessage);
+        return round_result = 'Loss';
     }
   } else if (playerStatus === 'Stand' && dealerStatus === 'Bust') {
       console.log(winMessage);
@@ -315,6 +322,34 @@ function determineResult(playerStatus: String, playerScore: number, dealerStatus
   }
 }
 
-round_start()
+function generatePlayerHand(player_hand : string[]) {
+  // Select the "player-cards" div
+  var playerHandContainer = document.querySelector('#player-hand');
+
+  // Generate two playing card-shaped divs with the player's hand
+  var card1 = document.createElement('div');
+  card1.style.width = '80px';
+  card1.style.height = '120px';
+  card1.style.backgroundColor = 'white';
+  card1.style.borderRadius = '10px';
+  card1.style.margin = '5px';
+  card1.style.float = 'left';
+  // Add the first string from the player_hand array as text content to the card1 div
+  card1.textContent = player_hand[0];
+
+  var card2 = document.createElement('div');
+  card2.style.width = '80px';
+  card2.style.height = '120px';
+  card2.style.backgroundColor = 'white';
+  card2.style.borderRadius = '10px';
+  card2.style.margin = '5px';
+  card2.style.float = 'left';
+  // Add the second string from the player_hand array as text content to the card2 div
+  card2.textContent = player_hand[1];
+
+  // Append the two playing card-shaped divs to the "player-cards" div
+  playerHandContainer?.appendChild(card1);
+  playerHandContainer?.appendChild(card2);
+}
 
 export default App;
