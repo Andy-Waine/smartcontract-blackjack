@@ -23,24 +23,33 @@ function App() {
     <div className="app-root">
       <div className="container">
           <div className="row">
+              <div className="col-2 col-options col-border-right">
+                  <div className="row row-header">
+                      <h6>Data Header</h6>
+                  </div>
+              </div>
+              <div className="col-8 col-options col-border-right">
+                  <div className="row row-header">
+                      <h5>Main Table Header</h5>
+                  </div>
+                  <div className="row row-body">
+                      <h6>Playing Field</h6>
+                  </div>
+                  <div className="row row-footer">
+                      <div className="col-3 col-options"></div>
+                      <div className="col-6 col-options"></div>
+                      <div className="col-3 col-options"></div>
+                  </div>
+              </div>
               <div className="col-2 col-options">
-                  <div className="row col-header">
-                      <h5>Left</h5>
-                  </div>
-              </div>
-              <div className="col-8 col-options">
-                  <div className="row col-header">
-                      <h5>Main Table</h5>
-                  </div>
-              </div>
-              <div className="col-2 col-options no-border-right">
-                  <div className="row col-header">
-                      <h5>Right</h5>
+                  <div className="row row-header">
+                      <h6>Betting Header</h6>
                   </div>
               </div>
           </div>
       </div>
     </div>
+
   );
 }
 
