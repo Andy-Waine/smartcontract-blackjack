@@ -120,9 +120,9 @@ async function deal() {
   let dealer_card_2: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0]; // selects random card from deck for dealer
   
   var player_hand: string[] = [card_1.toString(), card_2.toString()];                   // compounds cards into 'hand' array
-  await generatePlayerHand(player_hand);                                                     // generates player hand on screen
+  await generatePlayerHand(player_hand);                                               // generates player hand on screen
   var dealer_hand: string[] = [dealer_card_1.toString(), dealer_card_2.toString()];
-  await generateDealerHand(dealer_hand);                                                     // generates dealer hand on screen
+  await generateDealerHand(dealer_hand);                                             // generates dealer hand on screen
 
   var isHandBlackjack: boolean = blackjackChecker(player_hand);
 
@@ -171,27 +171,33 @@ function playersTurn(player_hand: string[], dealer_hand: string[], isHandBlackja
   // declarations (w/ dummy values)
   let player_status: string = ''; // dummy value until user choice is made
   let player_score: number = 0; // dummy value until score is evaluated
-  
+
   // HIT button event
   const hitButton = document.getElementById("hit-btn");
-  hitButton?.addEventListener("click", () => {
-    console.log("You choose to hit.\n");
+    hitButton?.addEventListener("click", async () => {
+      // player_score = eval_score(player_hand);
+    if (player_status !== 'Bust' && player_status !== 'Stand') {
 
-    // a new card is drawn from the deck and added to the player's hand
-    let new_card: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0];    // Randomization to be Replaced by Chainlink VRF
-    player_hand.push(new_card);
-    console.log("player_hand: " + player_hand);
+      console.log("You choose to hit.\n");
 
-    // checks if player_hand is a bust
-    let [is_bust, player_score] = checkBust(player_hand);
+      // a new card is drawn from the deck and added to the player's hand
+      let new_card: string = await deck.splice(Math.floor(Math.random() * deck.length), 1)[0];    // Randomization to be Replaced by Chainlink VRF
 
-    if (is_bust === true) {
-        console.log(player_hand, " | Uh-oh, You BUST!");
-        player_status = 'Bust';
-        postDecision(player_status, player_score, dealer_hand);     // if BUST, move to dealer turn and game eval
-    } else {
-        playersTurn(player_hand, dealer_hand, isHandBlackjack);   // loops back to choose until STAND or BUST
-    }                            
+      await player_hand.push(new_card);
+      console.log("player_hand: " + player_hand);
+
+      // generate new card on screen
+      await generatePlayerDraw(player_hand);
+
+      // checks if player_hand is a bust
+      let [is_bust, player_score] = checkBust(player_hand);
+
+      if (is_bust === true) {
+          console.log(player_hand, " | Uh-oh, You BUST!");
+          player_status = 'Bust';
+          postDecision(player_status, player_score, dealer_hand);     // if BUST, move to dealer turn and game eval
+      }
+    }
   });
 
   // STAND button event
@@ -359,6 +365,7 @@ function determineResult(playerStatus: String, playerScore: number, dealerStatus
   }
 }
 
+// Function to generate the html/css for player's initial hand
 function generatePlayerHand(player_hand : string[]) {
   // Select the "player-cards" div
   var playerHandContainer = document.querySelector('#player-hand');
@@ -381,6 +388,39 @@ function generatePlayerHand(player_hand : string[]) {
   playerHandContainer?.appendChild(card2);
 }
 
+// Function to generate the html/css for player's subsequent draws
+function generatePlayerDraw(player_hand : string[]) {
+
+  console.log("player_hand in generatePlayerDraw: ", player_hand)
+
+  // Select the "player-cards" div
+  var playerHandContainer = document.querySelector('#player-hand');
+
+  // remove all previously generated player cards
+  while (playerHandContainer?.firstChild) {
+    playerHandContainer.removeChild(playerHandContainer.firstChild);
+  }
+
+  // for all cards in the player's hand, generate a playing card-shaped div with the player's draw
+  for (var i = 0; i < player_hand.length; i++) {
+    console.log("printing player_hand[i]: ", player_hand[i])
+    var card = document.createElement('div');
+    card.classList.add("player-card");
+    if (i == 0) {
+      card.style.left = '15%';
+    } else  if (i == 1) {
+      card.style.left = '0%';
+    } else { 
+      card.style.left = '-15%';
+    }
+    // Add the string from the player_hand array as text content to the card div
+    card.textContent = player_hand[i];
+    // Append the playing card-shaped div to the "player-cards" div
+    playerHandContainer?.appendChild(card);
+  }
+}
+
+// Function to generate the html/css for dealer's initial hand
 function generateDealerHand(dealer_hand : string[]) {
   // Select the "dealer-cards" div
   var dealerHandContainer = document.querySelector('#dealer-hand');
@@ -396,7 +436,7 @@ function generateDealerHand(dealer_hand : string[]) {
   card2.classList.add("dealer-card");
   card2.style.left = '-12%';
   // second dealer card is face-down
-  card2.textContent = '???'
+  card2.textContent = '??'
 
   // Append the two playing card-shaped divs to the "dealer-cards" div
   dealerHandContainer?.appendChild(card1);
