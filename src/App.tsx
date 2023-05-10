@@ -406,12 +406,84 @@ function generatePlayerDraw(player_hand : string[]) {
     console.log("printing player_hand[i]: ", player_hand[i])
     var card = document.createElement('div');
     card.classList.add("player-card");
-    if (i == 0) {
-      card.style.left = '15%';
-    } else  if (i == 1) {
-      card.style.left = '0%';
-    } else { 
-      card.style.left = '-15%';
+    if (player_hand.length == 3) {
+      if (i == 0) {
+        card.style.left = '15%';
+      } else  if (i == 1) {
+        card.style.left = '0%';
+      } else { 
+        card.style.left = '-15%';
+      }
+    } else if (player_hand.length == 4) {
+      if (i == 0) {
+        card.style.left = '22.5%';
+      } else  if (i == 1) {
+        card.style.left = '7.5%';
+      } else if (i == 2) {
+        card.style.left = '-7.5%';
+      } else { 
+        card.style.left = '-22.5%';
+      }
+    } else if (player_hand.length == 5) {
+      if (i == 0) {
+        card.style.left = '30%';
+      } else  if (i == 1) {
+        card.style.left = '15%';
+      } else if (i == 2) {
+        card.style.left = '0%';
+      } else if (i == 3) {
+        card.style.left = '-15%';
+      } else {
+        card.style.left = '-30%';
+      }
+    } else if (player_hand.length == 6) {
+      if (i == 0) {
+        card.style.left = '37.5%';
+      } else  if (i == 1) {
+        card.style.left = '22.5%';
+      } else if (i == 2) {
+        card.style.left = '7.5%';
+      } else if (i == 3) {
+        card.style.left = '-7.5%';
+      } else if (i == 4) {
+        card.style.left = '-22.5%';
+      } else {
+        card.style.left = '-37.5%';
+      }
+    } else if (player_hand.length == 7) {
+      if (i == 0) {
+        card.style.left = '45%';
+      } else  if (i == 1) {
+        card.style.left = '30%';
+      } else if (i == 2) {
+        card.style.left = '15%';
+      } else if (i == 3) {
+        card.style.left = '0%';
+      } else if (i == 4) {
+        card.style.left = '-15%';
+      } else if (i == 5) {
+        card.style.left = '-30%';
+      } else {
+        card.style.left = '-45%';
+      }
+    } else if (player_hand.length == 8) {
+      if (i == 0) {
+        card.style.left = '52.5%';
+      } else  if (i == 1) {
+        card.style.left = '37.5%';
+      } else if (i == 2) {
+        card.style.left = '22.5%';
+      } else if (i == 3) {
+        card.style.left = '7.5%';
+      } else if (i == 4) {
+        card.style.left = '-7.5%';
+      } else if (i == 5) {
+        card.style.left = '-22.5%';
+      } else if (i == 6) {
+        card.style.left = '-37.5%';
+      } else {
+        card.style.left = '-52.5%';
+      }
     }
     // Add the string from the player_hand array as text content to the card div
     card.textContent = player_hand[i];
