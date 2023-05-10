@@ -68,12 +68,12 @@ function App() {
                           <div className="row row-player-choices">
                             <div className="col-2 col-options col-choice-button"></div>
                             <div className="col-4 col-options col-choice-button">
-                              <Button variant="contained" className="button-hit">
+                              <Button variant="contained" className="button-hit" id="hit-btn">
                                 Hit
                               </Button>
                             </div>
                             <div className="col-4 col-options col-choice-button">
-                              <Button variant="outlined" className="button-stand">
+                              <Button variant="outlined" className="button-stand" id="stand-btn">
                                 Stand
                               </Button>
                             </div>
@@ -103,30 +103,12 @@ async function round_start() {
   // dealer deals
   var { player_hand, dealer_hand, isHandBlackjack } = await deal();
 
-  // player's turn
-    // player_status: 'Bust' || 'Blackjack' || 'Stand'
-  var { player_status, player_score }= await playersTurn(player_hand); 
-
-  // dealer's turn
-    // dealer_status: 'Bust' || 'Blackjack' || 'Stand'
-  var { dealer_status, dealer_score } = await dealersTurn(dealer_hand);
-
-  // determine round result
-    // round_result: 'Win' || 'Blackjack' || 'Loss' || 'Push'
-  var round_result = await determineResult(player_status, player_score, dealer_status, dealer_score);
-
-  // NOTE: the round_result will be fed into the smart contract
-
-  console.log("Game Over.");
   console.log("player_hand: " + player_hand);
-  console.log("player_status: " + player_status);
-  console.log("player_score: " + player_score);
   console.log("dealer_hand: " + dealer_hand);
   console.log("isHandBlackjack: " + isHandBlackjack);
-  console.log("dealer_status: " + dealer_status);
-  console.log("dealer_score: " + dealer_score);
-  console.log("round_result: " + round_result);
-  console.log("deck: " + deck);
+
+  // player's turn
+  playersTurn(player_hand, dealer_hand, isHandBlackjack); 
 }
 
 async function deal() {
@@ -182,42 +164,77 @@ function blackjackChecker(hand: string[]): boolean {
     Returns PlayerStatus,
             player_score,
 */
-function playersTurn(player_hand: string[]) {           // results in Bust or Stand PlayerStatus
-    
-  console.log("Your Hand: "); 
-  console.log(player_hand);
-  console.log("How would you like to proceed?"); // HERE IS WHERE WE NEED AN EVENT LISTENER
-  console.log("(1) Hit");
-  console.log("(2) Stand");                         
+function playersTurn(player_hand: string[], dealer_hand: string[], isHandBlackjack: boolean) {                      
+
+  // FUTURE: Hit/Stand buttons should be greyed out until NOW
 
   // declarations (w/ dummy values)
-  let player_status: string = 'Stand'; // dummy value until user choice is made
-  let player_choice: number = 2; // dummy value until we implement user input UI in html
+  let player_status: string = ''; // dummy value until user choice is made
   let player_score: number = 0; // dummy value until score is evaluated
   
-
-  if (player_choice === 1) {                       // (1) HIT
+  // HIT button event
+  const hitButton = document.getElementById("hit-btn");
+  hitButton?.addEventListener("click", () => {
     console.log("You choose to hit.\n");
 
     // a new card is drawn from the deck and added to the player's hand
     let new_card: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0];    // Randomization to be Replaced by Chainlink VRF
     player_hand.push(new_card);
+    console.log("player_hand: " + player_hand);
 
     // checks if player_hand is a bust
     let [is_bust, player_score] = checkBust(player_hand);
 
     if (is_bust === true) {
-        console.log(player_hand, " | Uh-oh, You BUST!\n");
+        console.log(player_hand, " | Uh-oh, You BUST!");
         player_status = 'Bust';
+        postDecision(player_status, player_score, dealer_hand);     // if BUST, move to dealer turn and game eval
     } else {
-        playersTurn(player_hand);                   // loops back to choose until STAND or BUST
+        playersTurn(player_hand, dealer_hand, isHandBlackjack);   // loops back to choose until STAND or BUST
     }                            
-  } else if (player_choice === 2) {               // (2) STAND
-    console.log("You choose to stand.\n");
-    player_score = eval_score(player_hand);
-    player_status = 'Stand';
+  });
+
+  // STAND button event
+  const standButton = document.getElementById("stand-btn");
+  standButton?.addEventListener("click", () => {
+      console.log("You choose to stand.\n");
+      player_score = eval_score(player_hand);
+      if (isHandBlackjack === true) {
+        player_status = 'Blackjack';
+      } else {
+        player_status = 'Stand';
+      }
+      postDecision(player_status, player_score, dealer_hand); // if STAND, move to dealer turn and game eval
+  });
+ 
+  if (player_status !== 'Stand' && player_status !== 'Bust' && player_status !== 'Blackjack') {
+    //set timeout for 30 seconds
+    setTimeout(() => {
+      console.log("Waiting for player decision...");
+      // if no decision is made, playersTurn() is called again
+      playersTurn(player_hand, dealer_hand, isHandBlackjack);
+    }, 30000);
   }
-  return { player_status, player_score };
+}
+
+async function postDecision(player_status: string, player_score: number, dealer_hand: string[]) {
+  // dealer's turn
+    // dealer_status: 'Bust' || 'Blackjack' || 'Stand'
+    var { dealer_status, dealer_score } = await dealersTurn(dealer_hand);
+
+    // determine round result
+      // round_result: 'Win' || 'Blackjack' || 'Loss' || 'Push'
+    var round_result = await determineResult(player_status, player_score, dealer_status, dealer_score);
+  
+    // NOTE: the round_result will be fed into the smart contract
+  
+    console.log("Game Over.");
+    console.log("player_status: " + player_status);
+    console.log("player_score: " + player_score);
+    console.log("dealer_status: " + dealer_status);
+    console.log("dealer_score: " + dealer_score);
+    console.log("round_result: " + round_result);
+    console.log("deck: " + deck);
 }
 
 function checkBust(player_hand: string[]): [boolean, number] {
