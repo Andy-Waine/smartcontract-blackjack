@@ -434,8 +434,8 @@ function generateDealerHand(dealer_hand : string[]) {
   card2.style.fontWeight = '600';
   card2.style.fontSize = '14px';
   card2.style.left = '-12%';
-  // Add the second string from the dealer_hand array as text content to the card2 div
-  card2.textContent = dealer_hand[1];
+  // second dealer card is face-down
+  card2.textContent = '???'
 
   // Append the two playing card-shaped divs to the "dealer-cards" div
   dealerHandContainer?.appendChild(card1);
