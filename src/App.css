@@ -144,6 +144,15 @@ html {
     justify-content: center;
 }
 
+.your-hand {
+    position: absolute;
+    top: -15px;
+    left: 15px;
+    font-weight: 300;
+    font-size: 12px;
+    padding: 0px;
+}
+
 .row-player-choices {
     height: 20%;
     position: relative;
