@@ -178,6 +178,42 @@ html {
     color: #375BD2 !important;
 }
 
+.player-card {
+    width: 80px;
+    min-width: 80px;
+    height: 130px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(55,91,210,.4);
+    border: 1px solid #a0b3f2;
+    border-radius: 10px;
+    margin: 5px;
+    float: left;
+    z-index: 1;
+    margin-top: 5px;
+    padding-left: 5px;
+    position: relative;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.dealer-card {
+    width: 48px;
+    min-width: 48px;
+    height: 78px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(55,91,210,.4);
+    border: 1px solid #a0b3f2;
+    border-radius: 10px;
+    margin: 5px;
+    float: left;
+    z-index: 1;
+    margin-top: 5px;
+    padding-left: 5px;
+    position: relative;
+    font-weight: 600;
+    font-size: 14px;
+}
+
 .z-index-neg-10 {
     z-index: -10;
 }

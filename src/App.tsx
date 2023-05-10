@@ -365,41 +365,13 @@ function generatePlayerHand(player_hand : string[]) {
 
   // Generate two playing card-shaped divs with the player's hand
   var card1 = document.createElement('div');
-  card1.style.width = '80px';
-  card1.style.minWidth = '80px';
-  card1.style.height = '130px';
-  card1.style.backgroundColor = 'white';
-  card1.style.boxShadow = "0px 0px 10px rgba(55,91,210,1);" /* CLBLUE */
-  card1.style.border = '1px solid #a0b3f2'; /* Perano */
-  card1.style.borderRadius = '10px';
-  card1.style.margin = '5px';
-  card1.style.float = 'left';
-  card1.style.zIndex = '1';
-  card1.style.marginTop = '5px';
-  card1.style.paddingLeft = '5px';
-  card1.style.position = 'relative';
-  card1.style.fontWeight = '600';
-  card1.style.fontSize = '16px';
+  card1.classList.add("player-card");
   card1.style.left = '15%';
   // Add the first string from the player_hand array as text content to the card1 div
   card1.textContent = player_hand[0];
 
   var card2 = document.createElement('div');
-  card2.style.width = '80px';
-  card2.style.minWidth = '80px';
-  card2.style.height = '130px';
-  card2.style.backgroundColor = 'white';
-  card2.style.boxShadow = "0px 0px 10px rgba(55,91,210,1);" /* CLBLUE */
-  card2.style.border = '1px solid #a0b3f2'; /* Perano */
-  card2.style.borderRadius = '10px';
-  card2.style.margin = '5px';
-  card2.style.zIndex = '2';
-  card2.style.float = 'left';
-  card2.style.marginTop = '5px';
-  card2.style.paddingLeft = '5px';
-  card2.style.position = 'relative';
-  card2.style.fontWeight = '600';
-  card2.style.fontSize = '16px';
+  card2.classList.add("player-card");
   card2.style.left = '-15%';
   // Add the second string from the player_hand array as text content to the card2 div
   card2.textContent = player_hand[1];
@@ -415,41 +387,13 @@ function generateDealerHand(dealer_hand : string[]) {
 
   // Generate two playing card-shaped divs with the dealer's hand
   var card1 = document.createElement('div');
-  card1.style.width = '48px';
-  card1.style.minWidth = '48px';
-  card1.style.height = '78px';
-  card1.style.backgroundColor = 'white';
-  card1.style.boxShadow = "0px 0px 10px rgba(55,91,210,1);" /* CLBLUE */
-  card1.style.border = '1px solid #a0b3f2'; /* Perano */
-  card1.style.borderRadius = '10px';
-  card1.style.margin = '5px';
-  card1.style.float = 'left';
-  card1.style.zIndex = '1';
-  card1.style.marginTop = '5px';
-  card1.style.paddingLeft = '5px';
-  card1.style.position = 'relative';
-  card1.style.fontWeight = '600';
-  card1.style.fontSize = '14px';
+  card1.classList.add("dealer-card");
   card1.style.left = '12%';
   // Add the first string from the dealer_hand array as text content to the card1 div
   card1.textContent = dealer_hand[0];
 
   var card2 = document.createElement('div');
-  card2.style.width = '48px';
-  card2.style.minWidth = '48px';
-  card2.style.height = '78px';
-  card2.style.backgroundColor = 'white';
-  card2.style.boxShadow = "0px 0px 10px rgba(55,91,210,1);" /* CLBLUE */
-  card2.style.border = '1px solid #a0b3f2'; /* Perano */
-  card2.style.borderRadius = '10px';
-  card2.style.margin = '5px';
-  card2.style.zIndex = '2';
-  card2.style.float = 'left';
-  card2.style.marginTop = '5px';
-  card2.style.paddingLeft = '5px';
-  card2.style.position = 'relative';
-  card2.style.fontWeight = '600';
-  card2.style.fontSize = '14px';
+  card2.classList.add("dealer-card");
   card2.style.left = '-12%';
   // second dealer card is face-down
   card2.textContent = '???'
