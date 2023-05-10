@@ -76,7 +76,7 @@ html {
 
 .col-hand {
     max-width: fit-content;
-    display: contents; /* contents don't leave div */
+    display: flex;
 }
 
 .row-header {

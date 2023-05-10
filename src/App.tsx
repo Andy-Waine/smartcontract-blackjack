@@ -120,7 +120,7 @@ async function deal() {
   let dealer_card_2: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0]; // selects random card from deck for dealer
   
   var player_hand: string[] = [card_1.toString(), card_2.toString()];                   // compounds cards into 'hand' array
-  await generatePlayerHand(player_hand);                                               // generates player hand on screen
+  await generatePlayerDraw(player_hand);                                               // generates player hand on screen
   var dealer_hand: string[] = [dealer_card_1.toString(), dealer_card_2.toString()];
   await generateDealerHand(dealer_hand);                                             // generates dealer hand on screen
 
@@ -380,6 +380,7 @@ function generatePlayerHand(player_hand : string[]) {
   var card2 = document.createElement('div');
   card2.classList.add("player-card");
   card2.style.left = '-15%';
+  card2.style.zIndex = '2';
   // Add the second string from the player_hand array as text content to the card2 div
   card2.textContent = player_hand[1];
 
@@ -406,7 +407,13 @@ function generatePlayerDraw(player_hand : string[]) {
     console.log("printing player_hand[i]: ", player_hand[i])
     var card = document.createElement('div');
     card.classList.add("player-card");
-    if (player_hand.length == 3) {
+    if (player_hand.length == 2) {
+      if (i == 0) {
+        card.style.left = '15%';
+      } else { 
+        card.style.left = '-15%';
+      }
+    } else if (player_hand.length == 3) {
       if (i == 0) {
         card.style.left = '15%';
       } else  if (i == 1) {
