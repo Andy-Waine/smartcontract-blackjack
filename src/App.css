@@ -70,6 +70,10 @@ html {
     border-right: 1px solid #a0b3f2; /* Perano (borders) */
 }
 
+.col-dealer-hand{
+    margin-top: 10px;
+}
+
 .col-hand {
     max-width: fit-content;
 }
@@ -79,6 +83,7 @@ html {
     max-height: 10%;
     justify-content: center;
     align-items: center;
+    padding-bottom: 10px;
 }
 
 .row-body {
@@ -93,6 +98,32 @@ html {
     max-height: 40%;
     justify-content: center;
     align-items: center;
+}
+
+.row-dealer-hand {
+    background-color: transparent;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 80%;
+    width: 100%;
+    clip-path: polygon(10 0, 100% 0, 100% 50%, 0 100%);
+    box-shadow: 0px 0px 10px rgba(55,91,210,1) inset; /* CLBLUE */
+    justify-content: center;
+}
+
+.row-dealer-hand-fill {
+    background-color: #DFE7FB;   /* Lavender (background) */
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 100%;
+    width: 100%;
+    opacity: 80%;
+    display: flex;
+    justify-content: center;
 }
 
 .row-player-hand {

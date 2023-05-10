@@ -33,15 +33,25 @@ function App() {
           <div className="row">
               <div className="col-2 col-options col-border-right">
                   <div className="row row-header">
-                      <h6>Data Header</h6>
+                      <h6>Data Feed</h6>
                   </div>
               </div>
               <div className="col-8 col-options col-border-right">
                   <div className="row row-header">
-                      <h5>Main Table Header</h5>
+                      <h5>Smart Contract Blackjack</h5>
                   </div>
                   <div className="row row-body">
-                      <h6>Dealer Field</h6>
+                  <div className="col-3 col-options"></div>
+                      <div className="col-6 col-options col-dealer-hand">
+                          <div className="row row-dealer-hand z-index-10">
+                            <span className="row-dealer-hand-fill z-index-0">
+                              <div className="col col-hand" id="dealer-hand">
+                                {/* Dealer's Hand */}
+                              </div>
+                            </span>
+                          </div>
+                      </div>
+                      <div className="col-3 col-options"></div>
                   </div>
                   <div className="row row-footer">
                       <div className="col-3 col-options"></div>
@@ -49,7 +59,7 @@ function App() {
                           <div className="row row-player-hand z-index-10">
                             <span className="row-player-hand-fill z-index-0">
                               <div className="col col-hand" id="player-hand">
-
+                                {/* Player's Hand */}
                               </div>
                             </span>
                           </div>
@@ -75,7 +85,7 @@ function App() {
               </div>
               <div className="col-2 col-options">
                   <div className="row row-header">
-                      <h6>Betting Header</h6>
+                      <h6>Wager</h6>
                   </div>
               </div>
           </div>
@@ -365,7 +375,7 @@ function generatePlayerHand(player_hand : string[]) {
   card2.style.zIndex = '2';
   card2.style.float = 'left';
   card2.style.marginTop = '5px';
-  card1.style.paddingLeft = '5px';
+  card2.style.paddingLeft = '5px';
   card2.style.position = 'relative';
   card2.style.fontWeight = '600';
   card2.style.left = '-15%';
