@@ -123,7 +123,8 @@ async function deal() {
   var player_hand: string[] = [card_1.toString(), card_2.toString()];                   // compounds cards into 'hand' array
   await generatePlayerDraw(player_hand);                                               // generates player hand on screen
   var dealer_hand: string[] = [dealer_card_1.toString(), dealer_card_2.toString()];
-  await generateDealerDraw(dealer_hand);                                             // generates dealer hand on screen
+  let player_status: string = "";
+  await generateDealerDraw(dealer_hand, player_status);                                             // generates dealer hand on screen
 
   var isHandBlackjack: boolean = blackjackChecker(player_hand);
 
@@ -227,7 +228,11 @@ function playersTurn(player_hand: string[], dealer_hand: string[], isHandBlackja
 async function postDecision(player_status: string, player_score: number, dealer_hand: string[]) {
   // dealer's turn
     // dealer_status: 'Bust' || 'Blackjack' || 'Stand'
-    var { dealer_status, dealer_score } = await dealersTurn(dealer_hand);
+    var { dealer_status, dealer_score } = await dealersTurn(dealer_hand, player_status);
+
+    // UI re-generation for 2-card dealer stand to remove '??' card
+    generateDealerDraw(dealer_hand, player_status); 
+
 
     // determine round result
       // round_result: 'Win' || 'Blackjack' || 'Loss' || 'Push'
@@ -296,7 +301,7 @@ function eval_score(player_hand: string[]): number {
     return totalScore;
 }
 
-async function dealersTurn(dealerHand: string[]) {
+async function dealersTurn(dealerHand: string[], player_status: string) {
   console.log('The Dealer reveals their initial draw: ', dealerHand);
   let isBlackjack = blackjackChecker(dealerHand);
   let dealer_score = eval_score(dealerHand); //initial score evaluation
@@ -305,7 +310,7 @@ async function dealersTurn(dealerHand: string[]) {
     let dealerDraw: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0]; // Randomization to be Replaced by Chainlink VRF
     console.log('The Dealer draws another card: ', dealerDraw);
     dealerHand.push(dealerDraw.toString());
-    await generateDealerDraw(dealerHand);
+    await generateDealerDraw(dealerHand, player_status); // update dealer's hand UI
     dealer_score = eval_score(dealerHand);
   }
   if (dealer_score > 21) {
@@ -477,9 +482,8 @@ function generatePlayerDraw(player_hand : string[]) {
   }
 }
 
-
 // Function to generate the html/css for dealer's subsequent draws
-function generateDealerDraw(dealer_hand : string[]) {
+function generateDealerDraw(dealer_hand : string[], player_status : string) {
 
   console.log("dealer_hand in generatedealerDraw: ", dealer_hand)
 
@@ -496,10 +500,15 @@ function generateDealerDraw(dealer_hand : string[]) {
     console.log("printing dealer_hand[i]: ", dealer_hand[i])
     var card = document.createElement('div');
     card.classList.add("dealer-card");
+    // Add the string from the dealer_hand array as text content to the card div
+    card.textContent = dealer_hand[i];
     if (dealer_hand.length == 2) {
       if (i == 0) {
         card.style.left = '10%';
-      } else { 
+      } else if (i == 1 && player_status !== 'Stand' && player_status !== 'Bust' && player_status !== 'Blackjack') { 
+        card.style.left = '-15%';
+        card.textContent = '??' // second dealer card is face-down until player stands/busts
+      } else {
         card.style.left = '-15%';
       }
     } else if (dealer_hand.length == 3) {
@@ -581,8 +590,6 @@ function generateDealerDraw(dealer_hand : string[]) {
         card.style.left = '-35%';
       }
     }
-    // Add the string from the dealer_hand array as text content to the card div
-    card.textContent = dealer_hand[i];
     // Append the playing card-shaped div to the "dealer-cards" div
     dealerHandContainer?.appendChild(card);
   }
