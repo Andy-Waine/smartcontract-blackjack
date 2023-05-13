@@ -423,73 +423,73 @@ function generatePlayerDraw(player_hand : string[]) {
       }
     } else if (player_hand.length == 4) {
       if (i == 0) {
-        card.style.left = '15%';
+        card.style.left = '20%';
       } else  if (i == 1) {
         card.style.left = '0%';
       } else if (i == 2) {
-        card.style.left = '-15%';
+        card.style.left = '-20%';
       } else { 
-        card.style.left = '-30%';
+        card.style.left = '-40%';
       }
     } else if (player_hand.length == 5) {
       if (i == 0) {
-        card.style.left = '30%';
-      } else  if (i == 1) {
         card.style.left = '15%';
+      } else  if (i == 1) {
+        card.style.left = '-5%';
       } else if (i == 2) {
-        card.style.left = '0%';
+        card.style.left = '-25%';
       } else if (i == 3) {
-        card.style.left = '-15%';
+        card.style.left = '-45%';
       } else {
-        card.style.left = '-30%';
+        card.style.left = '-65%';
       }
     } else if (player_hand.length == 6) {
       if (i == 0) {
-        card.style.left = '37.5%';
+        card.style.left = '10%';
       } else  if (i == 1) {
-        card.style.left = '22.5%';
+        card.style.left = '-10%';
       } else if (i == 2) {
-        card.style.left = '7.5%';
+        card.style.left = '-30%';
       } else if (i == 3) {
-        card.style.left = '-7.5%';
+        card.style.left = '-50%';
       } else if (i == 4) {
-        card.style.left = '-22.5%';
+        card.style.left = '-70%';
       } else {
-        card.style.left = '-37.5%';
+        card.style.left = '-90%';
       }
     } else if (player_hand.length == 7) {
       if (i == 0) {
-        card.style.left = '45%';
+        card.style.left = '5%';
       } else  if (i == 1) {
-        card.style.left = '30%';
-      } else if (i == 2) {
-        card.style.left = '15%';
-      } else if (i == 3) {
-        card.style.left = '0%';
-      } else if (i == 4) {
         card.style.left = '-15%';
+      } else if (i == 2) {
+        card.style.left = '-35%';
+      } else if (i == 3) {
+        card.style.left = '-55%';
+      } else if (i == 4) {
+        card.style.left = '-75%';
       } else if (i == 5) {
-        card.style.left = '-30%';
+        card.style.left = '-95%';
       } else {
-        card.style.left = '-45%';
+        card.style.left = '-115%';
       }
     } else if (player_hand.length == 8) {
       if (i == 0) {
-        card.style.left = '52.5%';
+        card.style.left = '0%';
       } else  if (i == 1) {
-        card.style.left = '37.5%';
+        card.style.left = '-20%';
       } else if (i == 2) {
-        card.style.left = '22.5%';
+        card.style.left = '-40%';
       } else if (i == 3) {
-        card.style.left = '7.5%';
+        card.style.left = '-60%';
       } else if (i == 4) {
-        card.style.left = '-7.5%';
+        card.style.left = '-80%';
       } else if (i == 5) {
-        card.style.left = '-22.5%';
+        card.style.left = '-100%';
       } else if (i == 6) {
-        card.style.left = '-37.5%';
+        card.style.left = '-120%';
       } else {
-        card.style.left = '-52.5%';
+        card.style.left = '-140%';
       }
     }
     // Add the string from the player_hand array as text content to the card div
