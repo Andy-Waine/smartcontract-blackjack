@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Button } from '@mui/material'
+import { time } from 'console';
 
 // global variable(s)
 var deck: string[] = [
@@ -122,7 +123,7 @@ async function deal() {
   var player_hand: string[] = [card_1.toString(), card_2.toString()];                   // compounds cards into 'hand' array
   await generatePlayerDraw(player_hand);                                               // generates player hand on screen
   var dealer_hand: string[] = [dealer_card_1.toString(), dealer_card_2.toString()];
-  await generateDealerHand(dealer_hand);                                             // generates dealer hand on screen
+  await generateDealerDraw(dealer_hand);                                             // generates dealer hand on screen
 
   var isHandBlackjack: boolean = blackjackChecker(player_hand);
 
@@ -295,7 +296,7 @@ function eval_score(player_hand: string[]): number {
     return totalScore;
 }
 
-function dealersTurn(dealerHand: string[]) {
+async function dealersTurn(dealerHand: string[]) {
   console.log('The Dealer reveals their initial draw: ', dealerHand);
   let isBlackjack = blackjackChecker(dealerHand);
   let dealer_score = eval_score(dealerHand); //initial score evaluation
@@ -304,6 +305,7 @@ function dealersTurn(dealerHand: string[]) {
     let dealerDraw: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0]; // Randomization to be Replaced by Chainlink VRF
     console.log('The Dealer draws another card: ', dealerDraw);
     dealerHand.push(dealerDraw.toString());
+    await generateDealerDraw(dealerHand);
     dealer_score = eval_score(dealerHand);
   }
   if (dealer_score > 21) {
@@ -363,30 +365,6 @@ function determineResult(playerStatus: String, playerScore: number, dealerStatus
       console.log(pushMessage);
       return round_result = 'Push';
   }
-}
-
-// Function to generate the html/css for player's initial hand
-function generatePlayerHand(player_hand : string[]) {
-  // Select the "player-cards" div
-  var playerHandContainer = document.querySelector('#player-hand');
-
-  // Generate two playing card-shaped divs with the player's hand
-  var card1 = document.createElement('div');
-  card1.classList.add("player-card");
-  card1.style.left = '15%';
-  // Add the first string from the player_hand array as text content to the card1 div
-  card1.textContent = player_hand[0];
-
-  var card2 = document.createElement('div');
-  card2.classList.add("player-card");
-  card2.style.left = '-15%';
-  card2.style.zIndex = '2';
-  // Add the second string from the player_hand array as text content to the card2 div
-  card2.textContent = player_hand[1];
-
-  // Append the two playing card-shaped divs to the "player-cards" div
-  playerHandContainer?.appendChild(card1);
-  playerHandContainer?.appendChild(card2);
 }
 
 // Function to generate the html/css for player's subsequent draws
@@ -499,26 +477,116 @@ function generatePlayerDraw(player_hand : string[]) {
   }
 }
 
-// Function to generate the html/css for dealer's initial hand
-function generateDealerHand(dealer_hand : string[]) {
+
+// Function to generate the html/css for dealer's subsequent draws
+function generateDealerDraw(dealer_hand : string[]) {
+
+  console.log("dealer_hand in generatedealerDraw: ", dealer_hand)
+
   // Select the "dealer-cards" div
   var dealerHandContainer = document.querySelector('#dealer-hand');
 
-  // Generate two playing card-shaped divs with the dealer's hand
-  var card1 = document.createElement('div');
-  card1.classList.add("dealer-card");
-  card1.style.left = '12%';
-  // Add the first string from the dealer_hand array as text content to the card1 div
-  card1.textContent = dealer_hand[0];
+  // remove all previously generated dealer cards
+  while (dealerHandContainer?.firstChild) {
+    dealerHandContainer.removeChild(dealerHandContainer.firstChild);
+  }
 
-  var card2 = document.createElement('div');
-  card2.classList.add("dealer-card");
-  card2.style.left = '-12%';
-  // second dealer card is face-down
-  card2.textContent = '??'
-
-  // Append the two playing card-shaped divs to the "dealer-cards" div
-  dealerHandContainer?.appendChild(card1);
-  dealerHandContainer?.appendChild(card2);
+  // for all cards in the dealer's hand, generate a playing card-shaped div with the dealer's draw
+  for (var i = 0; i < dealer_hand.length; i++) {
+    console.log("printing dealer_hand[i]: ", dealer_hand[i])
+    var card = document.createElement('div');
+    card.classList.add("dealer-card");
+    if (dealer_hand.length == 2) {
+      if (i == 0) {
+        card.style.left = '10%';
+      } else { 
+        card.style.left = '-15%';
+      }
+    } else if (dealer_hand.length == 3) {
+      if (i == 0) {
+        card.style.left = '15%';
+      } else  if (i == 1) {
+        card.style.left = '0%';
+      } else { 
+        card.style.left = '-15%';
+      }
+    } else if (dealer_hand.length == 4) {
+      if (i == 0) {
+        card.style.left = '15%';
+      } else  if (i == 1) {
+        card.style.left = '5%';
+      } else if (i == 2) {
+        card.style.left = '-5%';
+      } else { 
+        card.style.left = '-15%';
+      }
+    } else if (dealer_hand.length == 5) {
+      if (i == 0) {
+        card.style.left = '20%';
+      } else  if (i == 1) {
+        card.style.left = '10%';
+      } else if (i == 2) {
+        card.style.left = '0%';
+      } else if (i == 3) {
+        card.style.left = '-10%';
+      } else {
+        card.style.left = '-20%';
+      }
+    } else if (dealer_hand.length == 6) {
+      if (i == 0) {
+        card.style.left = '25%';
+      } else  if (i == 1) {
+        card.style.left = '15%';
+      } else if (i == 2) {
+        card.style.left = '5%';
+      } else if (i == 3) {
+        card.style.left = '-5%';
+      } else if (i == 4) {
+        card.style.left = '-15%';
+      } else {
+        card.style.left = '-25%';
+      }
+    } else if (dealer_hand.length == 7) {
+      if (i == 0) {
+        card.style.left = '30%';
+      } else  if (i == 1) {
+        card.style.left = '20%';
+      } else if (i == 2) {
+        card.style.left = '10%';
+      } else if (i == 3) {
+        card.style.left = '0%';
+      } else if (i == 4) {
+        card.style.left = '-10%';
+      } else if (i == 5) {
+        card.style.left = '-20%';
+      } else {
+        card.style.left = '-30%';
+      }
+    } else if (dealer_hand.length == 8) {
+      if (i == 0) {
+        card.style.left = '35%';
+      } else  if (i == 1) {
+        card.style.left = '25%';
+      } else if (i == 2) {
+        card.style.left = '15%';
+      } else if (i == 3) {
+        card.style.left = '5%';
+      } else if (i == 4) {
+        card.style.left = '-5%';
+      } else if (i == 5) {
+        card.style.left = '-15%';
+      } else if (i == 6) {
+        card.style.left = '-25%';
+      } else {
+        card.style.left = '-35%';
+      }
+    }
+    // Add the string from the dealer_hand array as text content to the card div
+    card.textContent = dealer_hand[i];
+    // Append the playing card-shaped div to the "dealer-cards" div
+    dealerHandContainer?.appendChild(card);
+  }
 }
+
+
 export default App;
