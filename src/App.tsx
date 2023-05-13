@@ -29,7 +29,7 @@ function App() {
         </Button>
       </div>
 
-      <div className="container z-index-0">
+      <div className="container z-index-0 width-900">
           <div className="row">
               <div className="col-2 col-options col-border-right">
                   <div className="row row-header">
@@ -41,8 +41,8 @@ function App() {
                       <h5>Smart Contract Blackjack</h5>
                   </div>
                   <div className="row row-body">
-                  <div className="col-3 col-options"></div>
-                      <div className="col-6 col-options col-dealer-hand">
+                  <div className="col-2 col-options"></div>
+                      <div className="col-8 col-options col-dealer-hand  width-340">
                           <div className="row row-dealer-hand z-index-10">
                             <span className="row-dealer-hand-fill z-index-0">
                             <span className="your-hand">Dealer's Hand</span>
@@ -52,11 +52,11 @@ function App() {
                             </span>
                           </div>
                       </div>
-                      <div className="col-3 col-options"></div>
+                      <div className="col-2 col-options"></div>
                   </div>
                   <div className="row row-footer">
-                      <div className="col-3 col-options"></div>
-                      <div className="col-6 col-options">
+                      <div className="col-2 col-options"></div>
+                      <div className="col-8 col-options width-340">
                           <div className="row row-player-hand z-index-10">
                             <span className="row-player-hand-fill z-index-0">
                               <span className="your-hand">Your Hand</span>
@@ -82,7 +82,7 @@ function App() {
 
                           </div>
                       </div>
-                      <div className="col-3 col-options"></div>
+                      <div className="col-2 col-options"></div>
                   </div>
               </div>
               <div className="col-2 col-options">
@@ -423,13 +423,13 @@ function generatePlayerDraw(player_hand : string[]) {
       }
     } else if (player_hand.length == 4) {
       if (i == 0) {
-        card.style.left = '22.5%';
+        card.style.left = '15%';
       } else  if (i == 1) {
-        card.style.left = '7.5%';
+        card.style.left = '0%';
       } else if (i == 2) {
-        card.style.left = '-7.5%';
+        card.style.left = '-15%';
       } else { 
-        card.style.left = '-22.5%';
+        card.style.left = '-30%';
       }
     } else if (player_hand.length == 5) {
       if (i == 0) {

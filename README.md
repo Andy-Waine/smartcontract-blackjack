@@ -1,1 +1,0 @@
-The issue is that whenever the 'Hit' button is pressed a second time, it draws two cards.

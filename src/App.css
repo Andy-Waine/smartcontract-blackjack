@@ -235,5 +235,16 @@ html {
     z-index: 10;
 }
 
+
+.width-340 {
+    max-width: 340px;
+    min-width: 340px;
+}
+
+.width-900 {
+    max-width: 900px;
+    min-width: 900px;
+}
+
 /* removes black border that appears after MUI buttons are clicked */
 button:focus { outline: none !important;;}
