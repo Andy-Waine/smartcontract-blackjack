@@ -1,7 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 import './App.css';
-import { Button } from '@mui/material'
+import { Button, TextField, Box } from '@mui/material'
 import { time } from 'console';
+
+interface Props {
+  denomination: string;
+  minValue: number;
+  maxValue: number;
+  incrementStep: number;
+}
 
 // global variable(s)
 var deck: string[] = [
@@ -97,6 +104,23 @@ function App() {
               <div className="col-2 col-options">
                   <div className="row row-header">
                       <h6>Wager</h6>
+                      <Box
+                        component="form"
+                        sx={{
+                          '& > :not(style)': { m: 1, width: '25ch' },
+                        }}
+                        noValidate
+                        autoComplete="off"
+                      >
+                        <TextField
+                          id="outlined-number"
+                          label="Number"
+                          type="number"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                        />
+                      </Box>
                   </div>
               </div>
           </div>
