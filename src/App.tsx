@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './App.css';
-import { Button, TextField, Box } from '@mui/material'
+import { Button, TextField, Box, FormControl, InputAdornment, OutlinedInput } from '@mui/material'
 import { time } from 'console';
 
 interface Props {
@@ -107,19 +107,27 @@ function App() {
                       <Box
                         component="form"
                         sx={{
-                          '& > :not(style)': { m: 1, width: '25ch' },
+                          '& > :not(style)': { m: 1, width: '10ch' },
                         }}
                         noValidate
                         autoComplete="off"
                       >
-                        <TextField
-                          id="outlined-number"
-                          label="Number"
-                          type="number"
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                        />
+                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                          <OutlinedInput
+                            defaultValue={.001}
+                            type="number"
+                            size="small"
+                            id="outlined-adornment-weight"
+                            endAdornment={<InputAdornment position="end">eth</InputAdornment>}
+                            aria-describedby="outlined-weight-helper-text"
+                            sx={{
+                              width: '115px',
+                            }}
+                            inputProps={{
+                              'aria-label': 'weight',
+                            }}
+                          />
+                        </FormControl>
                       </Box>
                   </div>
               </div>
