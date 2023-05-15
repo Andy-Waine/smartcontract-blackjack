@@ -20,13 +20,20 @@ var deck: string[] = [
   "2\u{2660}", "2\u{2666}", "2\u{2663}", "2\u{2665}",
 ];
 
+var round_result: String = ''; // 'Win' || 'Blackjack' || 'Loss' || 'Push'
+var player_hand: string[] = [];
+var dealer_hand: string[] = [];
+
 function App() {
   return (
     <div className="app-root">
-      {/* New Game button for testing only, to be removed */}
+      {/* New Game & Reload buttons for testing only, to be removed */}
       <div className='row match-bg'>
+        <Button variant="contained" className='button-hit' onClick={refreshPage}>
+          Restart
+        </Button>
         <Button variant="contained" className='button-hit' onClick={round_start}>
-          New Game
+          Deal
         </Button>
       </div>
 
@@ -61,6 +68,7 @@ function App() {
                           <div className="row row-player-hand z-index-10">
                             <span className="row-player-hand-fill z-index-0">
                               <span className="your-hand">Your Hand</span>
+                              <span className="game-result" id="game_result">{/* Game Result */}</span>
                               <div className="col col-hand" id="player-hand">
                                 {/* Player's Hand */}
                               </div>
@@ -99,7 +107,40 @@ function App() {
 }
 
 async function round_start() {
+
+  // clear local storage
+  localStorage.clear();
+
+  // reset round result
+  round_result = ''; // 'Win' || 'Blackjack' || 'Loss' || 'Push'
+
+  // reset hands
+  player_hand = [];
+  dealer_hand = [];
+
+  // reset 
+
   console.log("New Round!");
+
+  // reset deck
+  deck = [
+    "A\u{2660}", "A\u{2666}", "A\u{2663}", "A\u{2665}",
+    "K\u{2660}", "K\u{2666}", "K\u{2663}", "K\u{2665}",
+    "Q\u{2660}", "Q\u{2666}", "Q\u{2663}", "Q\u{2665}",
+    "J\u{2660}", "J\u{2666}", "J\u{2663}", "J\u{2665}",
+    "10\u{2660}", "10\u{2666}", "10\u{2663}", "10\u{2665}",
+    "9\u{2660}", "9\u{2666}", "9\u{2663}", "9\u{2665}",
+    "8\u{2660}", "8\u{2666}", "8\u{2663}", "8\u{2665}",
+    "7\u{2660}", "7\u{2666}", "7\u{2663}", "7\u{2665}",
+    "6\u{2660}", "6\u{2666}", "6\u{2663}", "6\u{2665}",
+    "5\u{2660}", "5\u{2666}", "5\u{2663}", "5\u{2665}",
+    "4\u{2660}", "4\u{2666}", "4\u{2663}", "4\u{2665}",
+    "3\u{2660}", "3\u{2666}", "3\u{2663}", "3\u{2665}",
+    "2\u{2660}", "2\u{2666}", "2\u{2663}", "2\u{2665}",
+  ];
+
+  // reset game result (You Win!/You Lose...) text to 'blank'
+  document.getElementById("game_result")!.innerHTML = "";
 
   // dealer deals
   var { player_hand, dealer_hand, isHandBlackjack } = await deal();
@@ -113,6 +154,7 @@ async function round_start() {
 }
 
 async function deal() {
+  console.log("deck ay deal(): " + deck);
   console.log("Dealing cards...");
   // ALL Randomization to be Replaced by Chainlink VRF
   let card_1: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0];           // selects random card from deck for player
@@ -120,9 +162,9 @@ async function deal() {
   let card_2: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0];         // selects random card from deck for player
   let dealer_card_2: string = deck.splice(Math.floor(Math.random() * deck.length), 1)[0]; // selects random card from deck for dealer
   
-  var player_hand: string[] = [card_1.toString(), card_2.toString()];                   // compounds cards into 'hand' array
+  player_hand = [card_1.toString(), card_2.toString()];                   // compounds cards into 'hand' array
   await generatePlayerDraw(player_hand);                                               // generates player hand on screen
-  var dealer_hand: string[] = [dealer_card_1.toString(), dealer_card_2.toString()];
+  dealer_hand = [dealer_card_1.toString(), dealer_card_2.toString()];
   let player_status: string = "";
   await generateDealerDraw(dealer_hand, player_status);                                             // generates dealer hand on screen
 
@@ -174,8 +216,8 @@ function playersTurn(player_hand: string[], dealer_hand: string[], isHandBlackja
   let player_status: string = ''; // dummy value until user choice is made
   let player_score: number = 0; // dummy value until score is evaluated
 
-  // HIT button event
-  const hitButton = document.getElementById("hit-btn");
+    // HIT button event
+    const hitButton = document.getElementById("hit-btn");
     hitButton?.addEventListener("click", async () => {
       // player_score = eval_score(player_hand);
     if (player_status !== 'Bust' && player_status !== 'Stand') {
@@ -194,6 +236,9 @@ function playersTurn(player_hand: string[], dealer_hand: string[], isHandBlackja
       // checks if player_hand is a bust
       let [is_bust, player_score] = checkBust(player_hand);
 
+      console.log("player_score: ", player_score);
+      console.log("player_hand: ", player_hand);
+
       if (is_bust === true) {
           console.log(player_hand, " | Uh-oh, You BUST!");
           player_status = 'Bust';
@@ -205,6 +250,12 @@ function playersTurn(player_hand: string[], dealer_hand: string[], isHandBlackja
   // STAND button event
   const standButton = document.getElementById("stand-btn");
   standButton?.addEventListener("click", () => {
+    // get player score
+    let player_score = eval_score(player_hand);
+    if (player_score > 21) {
+      player_status = 'Bust';
+    }
+    if (player_status !== 'Bust' && player_status !== 'Stand') {
       console.log("You choose to stand.\n");
       player_score = eval_score(player_hand);
       if (isHandBlackjack === true) {
@@ -212,17 +263,18 @@ function playersTurn(player_hand: string[], dealer_hand: string[], isHandBlackja
       } else {
         player_status = 'Stand';
       }
+    }
       postDecision(player_status, player_score, dealer_hand); // if STAND, move to dealer turn and game eval
   });
  
-  if (player_status !== 'Stand' && player_status !== 'Bust' && player_status !== 'Blackjack') {
-    //set timeout for 30 seconds
-    setTimeout(() => {
-      console.log("Waiting for player decision...");
-      // if no decision is made, playersTurn() is called again
-      playersTurn(player_hand, dealer_hand, isHandBlackjack);
-    }, 30000);
-  }
+  // if (player_status !== 'Stand' && player_status !== 'Bust' && player_status !== 'Blackjack') {
+  //   //set timeout for 30 seconds
+  //   setTimeout(() => {
+  //     console.log("Waiting for player decision...");
+  //     // if no decision is made, playersTurn() is called again
+  //     playersTurn(player_hand, dealer_hand, isHandBlackjack);
+  //   }, 30000);
+  // }
 }
 
 async function postDecision(player_status: string, player_score: number, dealer_hand: string[]) {
@@ -237,6 +289,23 @@ async function postDecision(player_status: string, player_score: number, dealer_
     // determine round result
       // round_result: 'Win' || 'Blackjack' || 'Loss' || 'Push'
     var round_result = await determineResult(player_status, player_score, dealer_status, dealer_score);
+
+    // if the player won, html is updated to display the win message
+    if (round_result === 'Win') {
+      document.getElementById("game_result")!.innerHTML = "You Win!";
+      document.getElementById("game_result")!.style.color = "#375BD2";  // CL Blue
+    } else if (round_result === 'Blackjack') {
+      document.getElementById("game_result")!.innerHTML = "Nice Blackjack!";
+      document.getElementById("game_result")!.style.color = "#375BD2";  // CL Blue
+    } else if (round_result === 'Loss') {
+      document.getElementById("game_result")!.innerHTML = "You Lose...";
+      document.getElementById("game_result")!.style.color = "#ff5e57";  // reddish orange
+    } else if (round_result === 'Push') {
+      document.getElementById("game_result")!.innerHTML = "Push!";
+      document.getElementById("game_result")!.style.color = "#ff5e57";  // reddish orange
+    } else {
+      document.getElementById("game_result")!.innerHTML = "";
+    }
   
     // NOTE: the round_result will be fed into the smart contract
   
@@ -250,17 +319,22 @@ async function postDecision(player_status: string, player_score: number, dealer_
 }
 
 function checkBust(player_hand: string[]): [boolean, number] {
+  console.log("checkBust A");
   let is_bust: boolean = false; // default value
   let player_score: number = eval_score(player_hand);
+  console.log("checkBust B");
   if (player_score > 21) {
+    console.log("checkBust C - is_bust = True");
     is_bust = true;
   } else {
+    console.log("checkBust C - is_bust = False");
     is_bust = false;
   }
   return [is_bust, player_score];
 }
 
 function eval_score(player_hand: string[]): number {
+  console.log("eval_score A");
   let totalScore: number = 0;                       // 0 placeholder
     let valsToEval: string[] = [];
     for (let card of player_hand) {
@@ -329,7 +403,6 @@ async function dealersTurn(dealerHand: string[], player_status: string) {
 }
 
 function determineResult(playerStatus: String, playerScore: number, dealerStatus: String, dealerScore: number) {
-  var round_result: String; // 'Win' || 'Blackjack' || 'Loss' || 'Push'
 
   const winMessage = "!!!   You WIN :)   !!!";
   const loseMessage = "!!!   You LOSE :(   !!!";
@@ -595,5 +668,8 @@ function generateDealerDraw(dealer_hand : string[], player_status : string) {
   }
 }
 
+async function refreshPage() {
+  await window.location.reload();
+}
 
 export default App;

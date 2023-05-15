@@ -23,5 +23,7 @@ Future Items
 
     Optional
         Sounds for Card Draw, win, loss
+        Image for Card Backs
         'Breathing' colorful background
         Comment at top of app.tsx for stack of functions in a game
+        More detailed card front images

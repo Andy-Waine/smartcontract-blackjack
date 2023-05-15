@@ -154,6 +154,16 @@ html {
     padding: 0px;
 }
 
+.game-result {
+    position: absolute;
+    top: -15px;
+    right: 15px;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 0px;
+    color: #ff5e57;
+}
+
 .row-player-choices {
     height: 20%;
     position: relative;
