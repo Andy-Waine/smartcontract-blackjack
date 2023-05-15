@@ -1,10 +1,16 @@
 Future Items
 
     Required
-        Top Right UI: 
-            Win/Loss/BlackJack Status (dynamic, disappears with new game)
+        Top Right UI:
             Input with Up/Down Arrows for betting
+                Set Max amount to .020 eth
+                Set increments to 0.001
+                Recolor Outline/Text w/ Palette
+                Try adding backgorund(?)
+                Alter style of arrows(?)
+            'Max' Button 
             'Deal' Button (Replaces 'new game' test button)
+                When pressed, the input field and Max/Deal buttons are deactivated
             Wallet balance
         Betting Logic
         Dyanmic Availability of Hit/Stand Buttons (Greyed out unless player turn)
@@ -27,3 +33,7 @@ Future Items
         'Breathing' colorful background
         Comment at top of app.tsx for stack of functions in a game
         More detailed card front images
+
+
+
+!!! May 15: We're getting to the point where it's a good idea to start splitting logic into different components.
