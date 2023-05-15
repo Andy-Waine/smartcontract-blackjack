@@ -26,8 +26,10 @@ Future Items
         Flow Blockchain integration
         Data Feed
         Eth to USD translation while player is betting
+        If the screen width is less than a certain amount, remove the Data Feed entirely
 
     Optional
+        Dark Mode w/ Toggle
         Sounds for Card Draw, win, loss
         Image for Card Backs
         'Breathing' colorful background

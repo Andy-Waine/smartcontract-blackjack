@@ -125,6 +125,9 @@ function App() {
                             }}
                             inputProps={{
                               'aria-label': 'weight',
+                              step: ".001",
+                              min: ".001",
+                              max: ".02",
                             }}
                           />
                         </FormControl>
