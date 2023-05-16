@@ -2,21 +2,18 @@ Future Items
 
     Required
         Top Right UI:
-            Input with Up/Down Arrows for betting
-                Set Max amount to .020 eth
-                Set increments to 0.001
-                Recolor Outline/Text w/ Palette
-                Try adding backgorund(?)
-                Alter style of arrows(?)
             'Deal' Button (Replaces 'new game' test button)
                 When pressed, the input field and Max/Deal buttons are deactivated
-            Wallet balance
         Betting Logic
         Dyanmic Availability of Hit/Stand Buttons (Greyed out unless player turn)
         Connect MetaMask functionality (use temporary button for testing)
         EVM Smart Contract for betting payouts
+            -Set up Truffle and Ganache/Hardhat for development and testing.
+            -Install and configure the web3.js library to interact with the Ethereum blockchain.
+            -Develop a smart contractyo handle betting payouts based upon the player's win/loss/blackjack/tie status.
+            -Implement Metamask to connect the user to the Ethereum network.
+            -Deploy the smart contract to the Ethereum network.
         Make Container dynamic so that the table does not appear unless MetaMask is connected
-
         Demo Video
         Detailed README
 
