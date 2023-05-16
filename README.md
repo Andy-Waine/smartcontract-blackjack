@@ -35,3 +35,9 @@ Future Items
 
 
 !!! May 15: We're getting to the point where it's a good idea to start splitting logic into different components.
+
+Truffle Commands
+    truffle init
+    add contract to 1_initial_migrations
+    truffle compile
+    truffle migrate --reset (adds contract to local blockchain)
