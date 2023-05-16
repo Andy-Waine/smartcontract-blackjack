@@ -2,6 +2,8 @@ import * as React from 'react';
 import './App.css';
 import { Button, TextField, Box, FormControl, InputAdornment, OutlinedInput } from '@mui/material'
 import { time } from 'console';
+import image from './eth-symbol.png';
+
 
 interface Props {
   denomination: string;
@@ -118,10 +120,14 @@ function App() {
                             type="number"
                             size="small"
                             id="outlined-adornment-weight"
-                            endAdornment={<InputAdornment position="end">eth</InputAdornment>}
+                            endAdornment={<InputAdornment position="end"><img src={image} alt="Ethereum Symbol" className="ethLogoMain"/></InputAdornment>}
                             aria-describedby="outlined-weight-helper-text"
                             sx={{
                               width: '115px',
+                              border: '1px solid #a0b3f2',
+                              input: {
+                                 color: '#1a2b6b2'
+                                },
                             }}
                             inputProps={{
                               'aria-label': 'weight',
@@ -132,6 +138,15 @@ function App() {
                           />
                         </FormControl>
                       </Box>
+                      <div className='row row-wager-btn'>
+                        <Button variant="contained" className="button-wager" id="wager-btn">
+                          Wager
+                        </Button>
+                      </div>
+                      <div className='row row-balance'>
+                        <div className='col-6 wallet-balance'>Balance:</div>
+                        <div className='col-6 wallet-balance'>.894 <img src={image} alt="Ethereum Symbol" className="ethLogo"/></div>
+                      </div>
                   </div>
               </div>
           </div>

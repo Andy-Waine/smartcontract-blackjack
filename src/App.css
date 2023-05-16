@@ -15,6 +15,7 @@ COLORS
     #a0b3f2 rgba(160,179,242,1) | Perano (borders)
     #375BD2 rgba(55,91,210,1)   | CLBlue (Hit Button/Card Row Border)
     #1a2b6b rgba(26,43,107,1)   | Biscay (Text)
+    #ff5e57                     | Reddish Orange
 */
 
 html {
@@ -78,6 +79,16 @@ html {
 .col-hand {
     max-width: fit-content;
     display: flex;
+}
+
+.wallet-balance {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+    padding-right: 8px;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
 }
 
 .row-header {
@@ -170,6 +181,17 @@ html {
     position: relative;
 }
 
+.row-wager-btn {
+    padding-left: 8px;
+    justify-content: center;
+    height: fit-content;
+}
+
+.row-balance {
+    padding-left: 6px;
+    justify-content: center;
+}
+
 .col-choice-button {
     top: -50%;
     display: flex;
@@ -188,6 +210,11 @@ html {
     background-color: white !important;
     border: 1px solid #375BD2 !important;
     color: #375BD2 !important;
+}
+
+.button-wager {
+    width: 100px;
+    background-color: #ff5e57 !important;
 }
 
 .player-card {
@@ -224,6 +251,22 @@ html {
     position: relative;
     font-weight: 600;
     font-size: 14px;
+}
+
+.ethLogoMain {
+    position: absolute;
+    padding-left: 1px;
+    right: 7px;
+    background-color: transparent;
+    height: 20px;
+}
+
+.ethLogo {
+    position: absolute;
+    top: 13px;
+    padding-left: 3px;
+    background-color: transparent;
+    height: 14px;
 }
 
 .z-index-neg-10 {

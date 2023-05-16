@@ -8,7 +8,6 @@ Future Items
                 Recolor Outline/Text w/ Palette
                 Try adding backgorund(?)
                 Alter style of arrows(?)
-            'Max' Button 
             'Deal' Button (Replaces 'new game' test button)
                 When pressed, the input field and Max/Deal buttons are deactivated
             Wallet balance
