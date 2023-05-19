@@ -35,11 +35,21 @@ Future Items
         More detailed card front images
 
 
-
-!!! May 15: We're getting to the point where it's a good idea to start splitting logic into different components.
-
 Truffle Commands
     truffle init
     add contract to 1_initial_migrations
     truffle compile
     truffle migrate --reset (adds contract to local blockchain)
+
+
+Our payout smart contract for our blackjack game should have the following characteristics:
+Inputs... 
+    player_bet: number - the amount of ethereum that the player has placed as a bet for this round 
+    game_result: string - the player's status at the end of the game ('Win' || 'Loss' || 'Blackjack' || 'Push')
+Functionality... If (game_result == 'Win' || 'Blackjack') {
+                   * pay the player the amount of eth equal to (2 * player_bet) *
+                } else if (game_result == 'Push') {
+                    * Return the eth to the player in the amount of player_bet *
+                } else {
+                    * send the player's player_bet eth to the house's wallet *
+                }
