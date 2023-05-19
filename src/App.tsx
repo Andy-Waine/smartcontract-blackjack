@@ -1,16 +1,11 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
+import Web3 from 'web3';
+// import { ethers } from 'ethers';
+
 import './App.css';
 import { Button, TextField, Box, FormControl, InputAdornment, OutlinedInput } from '@mui/material'
-import { time } from 'console';
 import image from './eth-symbol.png';
-
-
-interface Props {
-  denomination: string;
-  minValue: number;
-  maxValue: number;
-  incrementStep: number;
-}
 
 // global variable(s)
 var deck: string[] = [
@@ -34,6 +29,23 @@ var player_hand: string[] = [];
 var dealer_hand: string[] = [];
 
 function App() {
+  const [balance, setBalance] = useState(0);
+
+  useEffect(() => {
+    const getMetamaskBalance = async () => {
+      const web3 = new Web3((window as any).ethereum);
+      const accounts = await (window as any).ethereum.enable();
+      const balanceString: string = await web3.eth.getBalance(accounts[0]);
+      // transform wei to ether, transform balanceString to number, set balance
+      const balanceUnformatted = Number(web3.utils.fromWei(balanceString, 'ether'));
+      // fix balance to three decimal places without rounding
+      const balance = Math.floor(balanceUnformatted * 1000) / 1000;
+      setBalance(balance);
+    };
+    getMetamaskBalance();
+  }, []);
+
+
   return (
     <div className="app-root">
       {/* New Game & Reload buttons for testing only, to be removed */}
@@ -145,7 +157,7 @@ function App() {
                       </div>
                       <div className='row row-balance'>
                         <div className='col-6 wallet-balance'>Balance:</div>
-                        <div className='col-6 wallet-balance'>.894 <img src={image} alt="Ethereum Symbol" className="ethLogo"/></div>
+                        <div className='col-6 wallet-balance'>{balance} <img src={image} alt="Ethereum Symbol" className="ethLogo"/></div>
                       </div>
                   </div>
               </div>

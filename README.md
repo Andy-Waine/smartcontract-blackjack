@@ -1,12 +1,9 @@
 Future Items
 
     Required
-        Top Right UI:
-            'Deal' Button (Replaces 'new game' test button)
-                When pressed, the input field and Max/Deal buttons are deactivated
-        Betting Logic
-        Dyanmic Availability of Hit/Stand Buttons (Greyed out unless player turn)
+
         Connect MetaMask functionality (use temporary button for testing)
+            You should be able to see the account balance
         EVM Smart Contract for betting payouts
             -Set up Truffle and Ganache/Hardhat for development and testing.
             -Install and configure the web3.js library to interact with the Ethereum blockchain.
@@ -23,6 +20,11 @@ Future Items
         Data Feed
         Eth to USD translation while player is betting
         If the screen width is less than a certain amount, remove the Data Feed entirely
+        Top Right UI:
+            'Deal' Button (Replaces 'new game' test button)
+            When pressed, the input field and Max/Deal buttons are deactivated
+        Betting Logic
+        Dyanmic Availability of Hit/Stand Buttons (Greyed out unless player turn)
 
     Optional
         Dark Mode w/ Toggle
