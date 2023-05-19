@@ -678,17 +678,17 @@ function generateDealerDraw(dealer_hand : string[], player_status : string) {
       }
     } else if (dealer_hand.length == 6) {
       if (i == 0) {
-        card.style.left = '25%';
+        card.style.left = '20%';
       } else  if (i == 1) {
-        card.style.left = '15%';
+        card.style.left = '10%';
       } else if (i == 2) {
-        card.style.left = '5%';
+        card.style.left = '0%';
       } else if (i == 3) {
         card.style.left = '-5%';
       } else if (i == 4) {
-        card.style.left = '-15%';
+        card.style.left = '-10%';
       } else {
-        card.style.left = '-25%';
+        card.style.left = '-20%';
       }
     } else if (dealer_hand.length == 7) {
       if (i == 0) {
