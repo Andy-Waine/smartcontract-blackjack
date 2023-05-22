@@ -479,6 +479,17 @@ function determineResult(playerStatus: String, playerScore: number, dealerStatus
     } else {
         console.log(loseMessage);
         return round_result = 'Loss';
+    //     Web3.eth.sendTransaction({
+    //       from: "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
+    //       to: "0x086912faa7f6598d28d80c448c8d1e9dae5a4dee", 
+    //       value: web3.toWei(1, "ether"), 
+    //   }, function(err, transactionHash) {
+    //       if (err) { 
+    //           console.log(err); 
+    //       } else {
+    //           console.log(transactionHash);
+    //       }
+    //   });
     }
   } else if (playerStatus === 'Stand' && dealerStatus === 'Bust') {
       console.log(winMessage);

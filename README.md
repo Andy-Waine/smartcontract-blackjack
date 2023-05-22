@@ -53,3 +53,6 @@ Functionality... If (game_result == 'Win' || 'Blackjack') {
                 } else {
                     * send the player's player_bet eth to the house's wallet *
                 }
+
+
+VRFID 2153
