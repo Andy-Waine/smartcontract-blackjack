@@ -1,4 +1,5 @@
-// pragma solidity ^0.8.19;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
 
 // contract Payout {
 //     function payout(uint256 player_bet, string memory game_result) public payable {
