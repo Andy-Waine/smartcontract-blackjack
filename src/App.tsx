@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import Web3 from "web3";
 import { GetRandomNumber } from "./utils/VRFGenerator"; // changed
+import bigInt from "big-integer";
 // import { ethers } from 'ethers';
 
 import "./App.css";
@@ -75,13 +76,7 @@ var round_result: String = ""; // 'Win' || 'Blackjack' || 'Loss' || 'Push'
 var player_hand: string[] = [];
 var dealer_hand: string[] = [];
 
-//NEED: Which value are we passing into provider?
-const _VRFGenerator = async (provider: any) => {
-  // changed
-  const vrfResult = await GetRandomNumber();
-  console.log("VRF Result: ", vrfResult);
-};
-
+var vrfResult: any = 0; // placeholder until VRF request is made in round_start
 
 function App() {
   const [balance, setBalance] = useState(0);
@@ -258,6 +253,15 @@ async function round_start() {
   // clear local storage
   localStorage.clear();
 
+  
+  //NEED: Which value are we passing into provider?
+  vrfResult = async (provider: any) => {
+    // changed
+    const _vrfResult: any = await GetRandomNumber();
+    console.log("VRF Result: ", _vrfResult);
+    return _vrfResult
+  };
+
   // reset round result
   round_result = ""; // 'Win' || 'Blackjack' || 'Loss' || 'Push'
 
@@ -339,29 +343,27 @@ async function round_start() {
   playersTurn(player_hand, dealer_hand, isHandBlackjack);
 }
 
+// bigInt(vrfResult).mod(deck.length);
 async function deal() {
-  console.log("deck ay deal(): " + deck);
+  console.log("deck at deal(): " + deck);
   console.log("Dealing cards...");
-  // ALL Randomization to be Replaced by Chainlink VRF
-  let card_1: string = deck.splice(
-    Math.floor(Math.random() * deck.length),
-    1
-  )[0]; // selects random card from deck for player
-  let dealer_card_1: string = deck.splice(
-    Math.floor(Math.random() * deck.length),
-    1
-  )[0]; // selects random card from deck for dealer
-  let card_2: string = deck.splice(
-    Math.floor(Math.random() * deck.length),
-    1
-  )[0]; // selects random card from deck for player
-  let dealer_card_2: string = deck.splice(
-    Math.floor(Math.random() * deck.length),
-    1
-  )[0]; // selects random card from deck for dealer
 
+  // Randomized Selection Provided by Chainlink VRF
+  let card_1_int = (bigInt(vrfResult).mod(deck.length)).toJSNumber(); // uses remainder int of (vrfResult mod #cardsInDeck) to select card from deck
+  let card_1: string = deck.splice(card_1_int, 1)[0];  // card is removed from deck
+
+  let dealer_card_1_int = (bigInt(vrfResult).mod(deck.length)).toJSNumber();
+  let dealer_card_1: string = deck.splice(dealer_card_1_int, 1)[0];
+
+  let card_2_int = (bigInt(vrfResult).mod(deck.length)).toJSNumber();
+  let card_2: string = deck.splice(card_2_int, 1)[0];
+
+  let dealer_card_2_int = (bigInt(vrfResult).mod(deck.length)).toJSNumber();
+  let dealer_card_2: string = deck.splice(dealer_card_2_int, 1)[0];
+  
   player_hand = [card_1.toString(), card_2.toString()]; // compounds cards into 'hand' array
   await generatePlayerDraw(player_hand); // generates player hand on screen
+
   dealer_hand = [dealer_card_1.toString(), dealer_card_2.toString()];
   let player_status: string = "";
   await generateDealerDraw(dealer_hand, player_status); // generates dealer hand on screen
@@ -427,10 +429,8 @@ function playersTurn(
       console.log("You choose to hit.\n");
 
       // a new card is drawn from the deck and added to the player's hand
-      let new_card: string = await deck.splice(
-        Math.floor(Math.random() * deck.length),
-        1
-      )[0]; // Randomization to be Replaced by Chainlink VRF
+      let new_card_int = (bigInt(vrfResult).mod(deck.length)).toJSNumber(); // uses remainder int of (vrfResult mod #cardsInDeck) to select card from deck
+      let new_card: string = deck.splice(new_card_int, 1)[0]; // card is removed from deck
 
       await player_hand.push(new_card);
       console.log("player_hand: " + player_hand);
@@ -605,10 +605,8 @@ async function dealersTurn(dealerHand: string[], player_status: string) {
   let dealer_score = eval_score(dealerHand); //initial score evaluation
   let dealer_status: string;
   while (dealer_score <= 16) {
-    let dealerDraw: string = deck.splice(
-      Math.floor(Math.random() * deck.length),
-      1
-    )[0]; // Randomization to be Replaced by Chainlink VRF
+    let dealerDraw_int = (bigInt(vrfResult).mod(deck.length)).toJSNumber(); // uses remainder int of (vrfResult mod #cardsInDeck) to select card from deck
+    let dealerDraw: string = deck.splice(dealerDraw_int ,1)[0]; // card is removed from deck
     console.log("The Dealer draws another card: ", dealerDraw);
     dealerHand.push(dealerDraw.toString());
     await generateDealerDraw(dealerHand, player_status); // update dealer's hand UI
@@ -910,6 +908,10 @@ function generateDealerDraw(dealer_hand: string[], player_status: string) {
     // Append the playing card-shaped div to the "dealer-cards" div
     dealerHandContainer?.appendChild(card);
   }
+}
+
+function drawCard() {
+  
 }
 
 async function refreshPage() {
