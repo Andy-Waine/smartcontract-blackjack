@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import Web3 from "web3";
-import { GetRandomNumber } from "../utils/VRFGenerator"; // changed
+import { GetRandomNumber } from "./utils/VRFGenerator"; // changed
 // import { ethers } from 'ethers';
 
 import "./App.css";
@@ -76,7 +76,7 @@ var player_hand: string[] = [];
 var dealer_hand: string[] = [];
 
 //NEED: Which value are we passing into provider?
-const _VRFGenerator = async (provider) => {
+const _VRFGenerator = async (provider: any) => {
   // changed
   const vrfResult = await GetRandomNumber();
   console.log("VRF Result: ", vrfResult);
