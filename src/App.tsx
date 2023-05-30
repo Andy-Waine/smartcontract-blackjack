@@ -910,10 +910,6 @@ function generateDealerDraw(dealer_hand: string[], player_status: string) {
   }
 }
 
-function drawCard() {
-  
-}
-
 async function refreshPage() {
   await window.location.reload();
 }
