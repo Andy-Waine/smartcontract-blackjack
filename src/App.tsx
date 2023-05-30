@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import Web3 from "web3";
-import { VRFGenerator } from "../utils/VRFGenerator"; // changed
+import { GetRandomNumber } from "../utils/VRFGenerator"; // changed
 // import { ethers } from 'ethers';
 
 import "./App.css";
@@ -74,10 +74,15 @@ var deck: string[] = [
 var round_result: String = ""; // 'Win' || 'Blackjack' || 'Loss' || 'Push'
 var player_hand: string[] = [];
 var dealer_hand: string[] = [];
+
+//NEED: Which value are we passing into provider?
 const _VRFGenerator = async (provider) => {
   // changed
-  const randomNumber = await VRFGenerator();
+  const vrfResult = await GetRandomNumber();
+  console.log("VRF Result: ", vrfResult);
 };
+
+
 function App() {
   const [balance, setBalance] = useState(0);
 
