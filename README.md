@@ -1,9 +1,9 @@
 ## Built With
 
-[![React][react.js]][react-url]
-[![web3.js]][web3.js-url]
-[![solidity]][solidity-url]
 [![chainlink]][chainlink-url]
+[![React][react.js]][react-url]
+[![solidity]][solidity-url]
+[![web3.js]][web3.js-url]
 [![truffle]][truffle-url]
 [![ganache]][ganache-url]
 
