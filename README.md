@@ -1,12 +1,57 @@
-## Built With
+# :black_joker: Smart Contract Blackjack :diamonds: :clubs: :spades: :hearts:
 
-[![chainlink]][chainlink-url]
-[![React][react.js]][react-url]
-[![solidity]][solidity-url]
-[![web3.js]][web3.js-url]
-[![truffle]][truffle-url]
-[![ganache]][ganache-url]
+> The House is a Smart Contract in this Blackjack dApp that utilizes 
+> Chainlink VRF for a cryptograhically-guaranteed Randomized Deck Shuffling.
 
+<< DEMO GIF WILL GO HERE (CENTERED) >>
+
+## :file_folder: Table of Contents
+
+-   [General Information](#-general-information)
+-   [Technologies Used](#-technologies-used)
+-   [Advantages Over TradFi Blackjack](#-advantages-over-tradfi-blackjack)
+-   [Explainer: VRF-Based Shuffling Method](#-explainer:-vrf-based-shuffling-method)
+-   [Project Future](#-project-future)
+-   [Meet the Team](#-meet-the-team)
+
+## ℹ️ General Information
+
+-   Several bullet points about the app
+- 
+-  
+-  
+- (This project built and submitted for the Spring '23 Chainlink Hackathon)
+
+## 💻 Technologies Used
+
+-  [![chainlink]][chainlink-url]
+- [![React][react.js]][react-url]
+- [![solidity]][solidity-url]
+- [![web3.js]][web3.js-url]
+- [![truffle]][truffle-url]
+- [![ganache]][ganache-url]
+
+## 📈 Advantages Over TradFi Blackjack
+
+<< here we can put a side-by-side table highlighting advantages and disadvantages of using DeFi vs. TradFi for blackjack games >>
+
+
+## 🤓 Explainer: VRF-Based Shuffling Method
+
+<< Insert a Slide with graphics to explain how modular arithmetic was used for card selection, with the VRF as the dividend, deck.length as the divisor, and the remainder as the newly drawn card's position within the deck >>
+<< A small caption mentioning the benefit of using Chainlink VRF for randomization >>
+
+## 🧗‍♀️ Project Future
+
+> << A synopsis of the vision for the project moving forward >>
+-  << detail challenges faced during development and the steps we anticipate taking to overcome them >>
+-  << list some cool features we'd like to implement down the road >>
+
+## 👋 Meet the Team
+
+<< side-by-side github pfp's with embedded URLs >>
+<< dev names below each pfp >>
+Temporary: VRFID 2153
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
@@ -23,4 +68,4 @@
 [ganache]: https://img.shields.io/badge/GANACHE-yellow?style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDIgNzkuMTYwOTI0LCAyMDE3LzA3LzEzLTAxOjA2OjM5ICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+nhxg7wAAAqVJREFUOI1t08trXVUUx/Hv2ufse8+57+Q+ElPSUCWtpdqBIFQ6ysSRgkJxpDix+gc4ETrsSOysIx/gg9aBUiwiOLCIoChGoRPB0kRtoA9jYnJz3+fcs/fqIPH2ov5Ge7D2h/1YSwBWL75M6hQbCMnY0x9kzLWqzx5aOvwWaNTZ3DiXDEeXHQGhAa+KCDx29gMMgADOK8lYiaw58fBC9Nli036u7d+Pub/XlyoFc6lUCL7OhZxyXvHKJAYgdYoRKTerwYXDLftLvRI+lwy6jDOPRxgnKXkbrFSL5odSbN42IvPuQDEAxcicOdKUtUZZXvcKw9SDBIjI/vlEcF5RFQo5ebVW8GtxzrwyAeZmo0+janMucSHZqI+oHlzsn+yvXTog85ArN0rlUvzuBKjFbpQmCUG5Rb65DCh+1DnYK/iki2YJ+foRbO0QLnP4cTKYAKs3k1Ej34PePQKjlBdPEi08jk/6uMEu+dYx4sUnILBke/fIetsgpBPg/Mdb+uX1lPmFHLa7Du116vUKheUVSo8+jcR1dG+DyvAm1mSE+YiZUgBACFApGD661uav3YytjufO1h+8cOo2T50+SXsQILs3ULH89KflkXlDtWh4/6v2A6BaNCRj5ZNvO4SB0Bt6dvrK0aVbzM8YaM1w8eoOH17b5cWVGk8ejbjyXecB4DxRGAgPzYYA1CsG75Uf1z23txN2uj2u/zZiYdZyazMlb4VaKbATAIin/gwjgrXwxWqXO9sZqkqjGuKckreCVyUwUpw8IvA8cHcayRzs9T2NSkCrFmIEbChstjN+XhsO4py8Ng1cBZaBNyetIxDnBJnqp/2Z4b10rMsivDMNAAyAN4DjwBX+m28UThvhbBjIXT0YKPM/hTeAM8AzwK/ABvASsAJ8/+/i+whWCI78GsrmAAAAAElFTkSuQmCC
 [ganache-url]: https://trufflesuite.com/ganache/
 
-VRFID 2153
+
