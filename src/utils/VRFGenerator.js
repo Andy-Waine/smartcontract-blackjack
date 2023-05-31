@@ -6,7 +6,7 @@ export const GetRandomNumber = async (provider) => {
   try {
     const gasLimit = 200000;
     const options = {
-      from: account.address,
+      // from: account.address,
       gas: gasLimit,
     };
     const web3 = new Web3(provider);

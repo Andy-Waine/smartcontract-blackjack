@@ -81,11 +81,17 @@ html {
     display: flex;
 }
 
+.data-feed-col {
+    visibility: hidden;
+    background-color: #a0b3f2; /* Perano (borders) */
+    z-index: 100;
+}
+
 .wallet-balance {
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 12px;
-    padding-right: 8px;
+    padding-left: 0px;
+    padding-right: 0px;
     font-size: 14px;
     align-items: center;
     justify-content: center;
@@ -182,13 +188,14 @@ html {
 }
 
 .row-wager-btn {
-    padding-left: 8px;
+    padding-left: 30px;
+    padding-top: 5px;
     justify-content: center;
     height: fit-content;
 }
 
 .row-balance {
-    padding-left: 6px;
+    padding-left: 76px;
     justify-content: center;
 }
 
@@ -198,6 +205,18 @@ html {
     justify-content: center;
     align-items: center;
     background-color: transparent;
+}
+
+.dev-buttons {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    padding-top: 2px;
+    background-color: transparent;
+}
+
+.dev-btn-parent {
+    padding-left: 4px;
 }
 
 .button-hit {

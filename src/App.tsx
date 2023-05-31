@@ -100,31 +100,14 @@ function App() {
   return (
     <div className="app-root">
       {/* New Game & Reload buttons for testing only, to be removed */}
-      <div className="row match-bg">
-        <Button
-          variant="contained"
-          className="button-hit"
-          onClick={refreshPage}
-        >
-          Restart
-        </Button>
-        <Button
-          variant="contained"
-          className="button-hit"
-          onClick={round_start}
-        >
-          Deal
-        </Button>
-      </div>
-
       <div className="container z-index-0 width-900">
         <div className="row">
-          <div className="col-2 col-options col-border-right">
+          {/* <div className="col-2 col-options col-border-right data-feed-col">
             <div className="row row-header">
               <h6>Data Feed</h6>
             </div>
-          </div>
-          <div className="col-8 col-options col-border-right">
+          </div> */}
+          <div className="col-9 col-options col-border-right">
             <div className="row row-header">
               <h5>Smart Contract Blackjack</h5>
             </div>
@@ -182,9 +165,9 @@ function App() {
               <div className="col-2 col-options"></div>
             </div>
           </div>
-          <div className="col-2 col-options">
+          <div className="col-3 col-options">
             <div className="row row-header">
-              <h6>Wager</h6>
+              <h6>Wager:</h6>
               <Box
                 component="form"
                 sx={{
@@ -225,6 +208,13 @@ function App() {
                   />
                 </FormControl>
               </Box>
+              <div className="row row-balance">
+                <div className="col-6 wallet-balance">Balance:</div>
+                <div className="col-6 wallet-balance">
+                  {balance}{" "}
+                  <img src={image} alt="Ethereum Symbol" className="ethLogo" />
+                </div>
+              </div>
               <div className="row row-wager-btn">
                 <Button
                   variant="contained"
@@ -234,13 +224,30 @@ function App() {
                   Wager
                 </Button>
               </div>
-              <div className="row row-balance">
-                <div className="col-6 wallet-balance">Balance:</div>
-                <div className="col-6 wallet-balance">
-                  {balance}{" "}
-                  <img src={image} alt="Ethereum Symbol" className="ethLogo" />
-                </div>
-              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row match-bg">
+        <div className="col-3 dev-buttons">
+          <div className="row dev-buttons">
+            <div className="dev-btn-parent">
+              <Button
+                variant="contained"
+                className="button-hit"
+                onClick={refreshPage}
+              >
+                Restart
+              </Button>
+            </div>
+            <div className="dev-btn-parent">
+              <Button
+                variant="contained"
+                className="button-hit"
+                onClick={round_start}
+              >
+                Deal
+              </Button>
             </div>
           </div>
         </div>
