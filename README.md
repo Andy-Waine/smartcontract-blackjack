@@ -1,11 +1,11 @@
 ## Built With
 
-- [![React][react.js]][react-url]
-- [![web3.js]][web3.js-url]
-- [![solidity]][solidity-url]
-- [![chainlink]][chainlink-url]
-- [![truffle]][truffle-url]
-- [![ganache]][ganache-url]
+[![React][react.js]][react-url]
+[![web3.js]][web3.js-url]
+[![solidity]][solidity-url]
+[![chainlink]][chainlink-url]
+[![truffle]][truffle-url]
+[![ganache]][ganache-url]
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
