@@ -14,7 +14,6 @@
     "@types/node": "^16.18.25",
     "@types/react": "^18.2.5",
     "@types/react-dom": "^18.2.3",
-    "big-integer": "^1.6.51",
     "ethers": "^5.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

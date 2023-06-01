@@ -2,9 +2,6 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import Web3 from "web3";
 import { GetRandomNumber } from "./utils/VRFGenerator"; // changed
-import bigInt from "big-integer";
-// import { ethers } from 'ethers';
-
 import "./App.css";
 import {
   Button,
@@ -102,11 +99,6 @@ function App() {
       {/* New Game & Reload buttons for testing only, to be removed */}
       <div className="container z-index-0 width-900">
         <div className="row">
-          {/* <div className="col-2 col-options col-border-right data-feed-col">
-            <div className="row row-header">
-              <h6>Data Feed</h6>
-            </div>
-          </div> */}
           <div className="col-9 col-options col-border-right">
             <div className="row row-header">
               <h5>Smart Contract Blackjack</h5>
@@ -259,7 +251,6 @@ function App() {
 async function round_start() {
   // clear local storage
   localStorage.clear();
-
   
   //NEED: Which value are we passing into provider?
   vrfResult = async (provider: any) => {
@@ -277,7 +268,6 @@ async function round_start() {
   dealer_hand = [];
 
   // reset
-
   console.log("New Round!");
 
   // reset deck
@@ -350,22 +340,21 @@ async function round_start() {
   playersTurn(player_hand, dealer_hand, isHandBlackjack);
 }
 
-// bigInt(vrfResult).mod(deck.length);
 async function deal() {
   console.log("deck at deal(): " + deck);
   console.log("Dealing cards...");
 
   // Randomized Selection Provided by Chainlink VRF
-  let card_1_int = (bigInt(vrfResult).mod(deck.length)).toJSNumber(); // uses remainder int of (vrfResult mod #cardsInDeck) to select card from deck
+  let card_1_int = Remainder(vrfResult, deck.length); // uses remainder int of (vrfResult mod #cardsInDeck) to select card from deck
   let card_1: string = deck.splice(card_1_int, 1)[0];  // card is removed from deck
 
-  let dealer_card_1_int = (bigInt(vrfResult).mod(deck.length)).toJSNumber();
+  let dealer_card_1_int = Remainder(vrfResult, deck.length);
   let dealer_card_1: string = deck.splice(dealer_card_1_int, 1)[0];
 
-  let card_2_int = (bigInt(vrfResult).mod(deck.length)).toJSNumber();
+  let card_2_int = Remainder(vrfResult, deck.length);
   let card_2: string = deck.splice(card_2_int, 1)[0];
 
-  let dealer_card_2_int = (bigInt(vrfResult).mod(deck.length)).toJSNumber();
+  let dealer_card_2_int = Remainder(vrfResult, deck.length);
   let dealer_card_2: string = deck.splice(dealer_card_2_int, 1)[0];
   
   player_hand = [card_1.toString(), card_2.toString()]; // compounds cards into 'hand' array
@@ -436,7 +425,7 @@ function playersTurn(
       console.log("You choose to hit.\n");
 
       // a new card is drawn from the deck and added to the player's hand
-      let new_card_int = (bigInt(vrfResult).mod(deck.length)).toJSNumber(); // uses remainder int of (vrfResult mod #cardsInDeck) to select card from deck
+      let new_card_int = Remainder(vrfResult, deck.length); // uses remainder int of (vrfResult mod #cardsInDeck) to select card from deck
       let new_card: string = deck.splice(new_card_int, 1)[0]; // card is removed from deck
 
       await player_hand.push(new_card);
@@ -478,15 +467,6 @@ function playersTurn(
     }
     postDecision(player_status, player_score, dealer_hand); // if STAND, move to dealer turn and game eval
   });
-
-  // if (player_status !== 'Stand' && player_status !== 'Bust' && player_status !== 'Blackjack') {
-  //   //set timeout for 30 seconds
-  //   setTimeout(() => {
-  //     console.log("Waiting for player decision...");
-  //     // if no decision is made, playersTurn() is called again
-  //     playersTurn(player_hand, dealer_hand, isHandBlackjack);
-  //   }, 30000);
-  // }
 }
 
 async function postDecision(
@@ -612,7 +592,7 @@ async function dealersTurn(dealerHand: string[], player_status: string) {
   let dealer_score = eval_score(dealerHand); //initial score evaluation
   let dealer_status: string;
   while (dealer_score <= 16) {
-    let dealerDraw_int = (bigInt(vrfResult).mod(deck.length)).toJSNumber(); // uses remainder int of (vrfResult mod #cardsInDeck) to select card from deck
+    let dealerDraw_int = Remainder(vrfResult, deck.length); // uses remainder int of (vrfResult mod #cardsInDeck) to select card from deck
     let dealerDraw: string = deck.splice(dealerDraw_int ,1)[0]; // card is removed from deck
     console.log("The Dealer draws another card: ", dealerDraw);
     dealerHand.push(dealerDraw.toString());
@@ -919,6 +899,12 @@ function generateDealerDraw(dealer_hand: string[], player_status: string) {
 
 async function refreshPage() {
   await window.location.reload();
+}
+
+function Remainder(bigNumber: number, smallNumber: number): number {
+  let remainder;
+  remainder = bigNumber - Math.floor(bigNumber / smallNumber) * smallNumber;
+  return remainder;
 }
 
 export default App;
