@@ -1,7 +1,7 @@
 # :black_joker: Smart Contract Blackjack :diamonds: :spades: :hearts: :clubs:
 
 > The House is a Smart Contract in this Blackjack dApp that utilizes 
-> Chainlink VRF for cryptograhically-guaranteed Randomized Deck Shuffling.
+> Chainlink VRF for cryptograhically-guaranteed randomized deck shuffling.
 
 << DEMO GIF WILL GO HERE (CENTERED) >>
 
