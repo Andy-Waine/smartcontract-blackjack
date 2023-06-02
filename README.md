@@ -10,7 +10,7 @@
 -   [General Information](#-general-information)
 -   [Technologies Used](#-technologies-used)
 -   [Advantages Over TradFi Blackjack](#-advantages-over-tradfi-blackjack)
--   [Explainer: VRF-Based Shuffling Method](#-explainer:-vrf-based-shuffling-method)
+-   [Explainer: VRF-Based Shuffling Method](#-explainer-vrf-based-shuffling-method)
 -   [Project Future](#-project-future)
 -   [Meet the Team](#-meet-the-team)
 
