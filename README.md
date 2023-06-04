@@ -54,7 +54,6 @@ Currently, we are working to overcome the challenge of obtaining a VRF response 
 ## 🤓 Explainer: VRF-Based Shuffling Method
 
 <p align="center"><img src="src/vrf-shuffling.PNG" alt="Shuffling Process Visualization"></p>
-<< A small caption mentioning the benefit of using Chainlink VRF for randomization >>
 
 ## 🧗‍♀️ Project Future
 
