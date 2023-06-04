@@ -13,60 +13,23 @@ import {
 } from "@mui/material";
 import image from "./eth-symbol.png";
 
-// global variable(s)
+    
+//  deck of cards
+//  \u{2660} = ♠, \u{2666} = ♦, \u{2663} = ♧, \u{2665} = ♡ 
 var deck: string[] = [
-  "A\u{2660}",
-  "A\u{2666}",
-  "A\u{2663}",
-  "A\u{2665}",
-  "K\u{2660}",
-  "K\u{2666}",
-  "K\u{2663}",
-  "K\u{2665}",
-  "Q\u{2660}",
-  "Q\u{2666}",
-  "Q\u{2663}",
-  "Q\u{2665}",
-  "J\u{2660}",
-  "J\u{2666}",
-  "J\u{2663}",
-  "J\u{2665}",
-  "10\u{2660}",
-  "10\u{2666}",
-  "10\u{2663}",
-  "10\u{2665}",
-  "9\u{2660}",
-  "9\u{2666}",
-  "9\u{2663}",
-  "9\u{2665}",
-  "8\u{2660}",
-  "8\u{2666}",
-  "8\u{2663}",
-  "8\u{2665}",
-  "7\u{2660}",
-  "7\u{2666}",
-  "7\u{2663}",
-  "7\u{2665}",
-  "6\u{2660}",
-  "6\u{2666}",
-  "6\u{2663}",
-  "6\u{2665}",
-  "5\u{2660}",
-  "5\u{2666}",
-  "5\u{2663}",
-  "5\u{2665}",
-  "4\u{2660}",
-  "4\u{2666}",
-  "4\u{2663}",
-  "4\u{2665}",
-  "3\u{2660}",
-  "3\u{2666}",
-  "3\u{2663}",
-  "3\u{2665}",
-  "2\u{2660}",
-  "2\u{2666}",
-  "2\u{2663}",
-  "2\u{2665}",
+  "A\u{2660}", "A\u{2666}", "A\u{2663}", "A\u{2665}",
+  "K\u{2660}", "K\u{2666}", "K\u{2663}", "K\u{2665}",
+  "Q\u{2660}", "Q\u{2666}", "Q\u{2663}", "Q\u{2665}",
+  "J\u{2660}", "J\u{2666}", "J\u{2663}", "J\u{2665}",
+  "10\u{2660}", "10\u{2666}", "10\u{2663}", "10\u{2665}",
+  "9\u{2660}", "9\u{2666}", "9\u{2663}", "9\u{2665}",
+  "8\u{2660}", "8\u{2666}", "8\u{2663}", "8\u{2665}",
+  "7\u{2660}", "7\u{2666}", "7\u{2663}", "7\u{2665}",
+  "6\u{2660}", "6\u{2666}", "6\u{2663}", "6\u{2665}",
+  "5\u{2660}", "5\u{2666}", "5\u{2663}", "5\u{2665}",
+  "4\u{2660}", "4\u{2666}", "4\u{2663}", "4\u{2665}",
+  "3\u{2660}", "3\u{2666}", "3\u{2663}", "3\u{2665}",
+  "2\u{2660}", "2\u{2666}", "2\u{2663}", "2\u{2665}",
 ];
 
 var round_result: String = ""; // 'Win' || 'Blackjack' || 'Loss' || 'Push'
@@ -77,6 +40,8 @@ var vrfResult: any = 0; // placeholder until VRF request is made in round_start
 
 function App() {
   const [balance, setBalance] = useState(0);
+  const remainderTest = Remainder(5793753837429717, 50);
+  console.log("remainderTest: ", remainderTest);
 
   useEffect(() => {
     const getMetamaskBalance = async () => {
@@ -902,8 +867,7 @@ async function refreshPage() {
 }
 
 function Remainder(bigNumber: number, smallNumber: number): number {
-  let remainder;
-  remainder = bigNumber - Math.floor(bigNumber / smallNumber) * smallNumber;
+  let remainder = bigNumber - Math.floor(bigNumber / smallNumber) * smallNumber;
   return remainder;
 }
 
