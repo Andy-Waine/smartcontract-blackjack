@@ -9,6 +9,7 @@
 
 -   [General Information](#-general-information)
 -   [Technologies Used](#-technologies-used)
+-   [Setup](#setup)
 -   [Advantages Over TradFi Blackjack](#-advantages-over-tradfi-blackjack)
 -   [Explainer: VRF-Based Shuffling Method](#-explainer-vrf-based-shuffling-method)
 -   [Project Future](#-project-future)
@@ -30,6 +31,15 @@
 - [![web3.js]][web3.js-url]
 - [![truffle]][truffle-url]
 - [![ganache]][ganache-url]
+
+## :wrench: Setup
+ - Ensure the [latest recommended version](https://nodejs.org/en) of Node and npm are installed on your machine.
+ - Clone this repository and run `npm install` to download all dependencies.
+ - Run `npm run start` to serve the application locally (localhost:3000)
+ - If the application throws a build error on `main`, try the `demo` branch to test the game and the application's UI (see 'Challenge' below for more details): 
+  
+:warning: Challenge :warning:
+Currently, we are working to overcome the challenge of obtaining a VRF response prior to dealing. When building locally on `main`, the most up-to-date logic for VRF shuffling throws a build error. We have provided a `demo` branch for game testing with hardcoded values in place of the response. This is our highest-priority item, but we will wait until the judging period for the Spring '23 Hackathon is over to continue work on this.
 
 ## 📈 Advantages Over TradFi Blackjack
 
