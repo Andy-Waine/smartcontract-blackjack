@@ -38,7 +38,7 @@
  - Run `npm run start` to serve the application locally (localhost:3000)
  - If the application throws a build error on `main`, try the `demo` branch to test the game and the application's UI (see 'Challenge' below for more details): 
   
-:warning: Challenge :warning:
+#### :warning: Challenge :warning:
 <p>
 Currently, we are working to overcome the challenge of obtaining a VRF response prior to dealing. When building locally on `main`, the most up-to-date logic for VRF shuffling throws a build error. We have provided a `demo` branch for game testing with hardcoded values in place of the response. This is our highest-priority item, but we will wait until the judging period for the Spring '23 Hackathon is over to continue work on this.
 </p>
