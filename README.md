@@ -1,7 +1,7 @@
 # :black_joker: Smart Contract Blackjack :diamonds: :spades: :hearts: :clubs:
 
 > The House is a Smart Contract in this Blackjack dApp that utilizes 
-> Chainlink VRF for a cryptograhically-guaranteed Randomized Deck Shuffling.
+> Chainlink VRF for cryptograhically-guaranteed randomized deck shuffling.
 
 << DEMO GIF WILL GO HERE (CENTERED) >>
 
@@ -10,7 +10,7 @@
 -   [General Information](#-general-information)
 -   [Technologies Used](#-technologies-used)
 -   [Advantages Over TradFi Blackjack](#-advantages-over-tradfi-blackjack)
--   [Explainer: VRF-Based Shuffling Method](#-explainer:-vrf-based-shuffling-method)
+-   [Explainer: VRF-Based Shuffling Method](#-explainer-vrf-based-shuffling-method)
 -   [Project Future](#-project-future)
 -   [Meet the Team](#-meet-the-team)
 
@@ -33,7 +33,10 @@
 
 ## 📈 Advantages Over TradFi Blackjack
 
-<< here we can put a side-by-side table highlighting advantages and disadvantages of using DeFi vs. TradFi for blackjack games >>
+|  | No Escrow Required | Trustless Randomization | Instant Payouts | No Middleman | Plug & Play |
+|--|--|--|--|--|--|
+| DeFi | <center>✅ The only 'escrow' made is for your current hand's wager. You do not need to entrust a third party with any other funds.</center> | <center>✅ Utilizes transparent methods of cryptographically guaranteed randomness from Chainlink VRF for card deals and draws.</center>| <center>✅ Payouts are distributed with each hand as you play.</center> | <center>✅ The Smart Contract is automated and requires little overhead to remain operational.</center> | <center>✅ No account creation necessary. The user can begin playing instantly with a funded MetaMask account.</center> |
+| TradFi | <center>❌ To bet, you must entrust your bankroll to an escrow account with a third party (the House).</center> | <center>❌ Methods of Randomization are not publicly available, requiring the user to trust the house is acting in good faith.</center> | <center>❌ Payouts are distributed asynchronously and may take several business days</center> | <center>❌ The House takes a sizable cut ('rake') from every hand and has high operational expenses.</center> | <center>❌ The user must create and verify an account, provide their banking information, and wire funds to begin playing.</center> |
 
 
 ## 🤓 Explainer: VRF-Based Shuffling Method
