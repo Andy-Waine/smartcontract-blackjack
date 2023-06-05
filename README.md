@@ -17,11 +17,9 @@
 
 ## ℹ️ General Information
 
--   Several bullet points about the app
-- 
--  
--  
-- (This project built and submitted for the Spring '23 Chainlink Hackathon)
+-   Start playing blackjack NOW with Smart Contract blackjack to cut out the middleman and avoid storing your money in a centralized escrow.
+-   Greater shuffling randomization than traditional methods is achieved through Chainlink VRF's cryptographically guaranteed random number issuance. 
+-   This project built and submitted for the Spring '23 Chainlink Hackathon.
 
 ## 💻 Technologies Used
 
