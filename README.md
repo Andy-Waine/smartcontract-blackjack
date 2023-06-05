@@ -61,8 +61,11 @@ Currently, we are working to overcome the challenge of obtaining a VRF response 
 
 ## 👋 Meet the Team
 
-<span align="center"><img src="src/pfp-andy.png" alt="Dev Profile Picture: Andy"></span>
-<span align="center"><img src="src/pfp-rahul.png" alt="Dev Profile Picture: Rahul"></span>
+<p align="center">
+  <a href="https://github.com/Andy-Waine"><img src="src/pfp-andy.png" width="200" alt="Dev Profile Picture: Andy" title="Andy Waine" /></a>
+  <span>&nbsp; &nbsp; &nbsp;</span>
+  <a href="https://github.com/guha-rahul"><img src="src/pfp-rahul.png" width="200" alt="Dev Profile Picture: Rahul" title="Rahul Guha" /></a>
+</p>
 
 
 Temporary: VRFID 2153
