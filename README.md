@@ -61,8 +61,10 @@ Currently, we are working to overcome the challenge of obtaining a VRF response 
 
 ## 👋 Meet the Team
 
-<< side-by-side github pfp's with embedded URLs >>
-<< dev names below each pfp >>
+<span align="center"><img src="src/pfp-andy.png" alt="Dev Profile Picture: Andy"></span>
+<span align="center"><img src="src/pfp-rahul.png" alt="Dev Profile Picture: Rahul"></span>
+
+
 Temporary: VRFID 2153
 
 <!-- MARKDOWN LINKS & IMAGES -->
