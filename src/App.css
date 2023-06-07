@@ -192,6 +192,13 @@ html {
     justify-content: center;
 }
 
+.continue-container {
+    padding-top: 165px;
+    align-items: center;
+    justify-content: center;
+    padding-left: 8px;
+}
+
 .col-choice-button {
     top: -50%;
     display: flex;

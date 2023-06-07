@@ -48,24 +48,9 @@ function App() {
 
   return (
     <div className="app-root">
-      {/* New Game & Reload buttons for testing only, to be removed */}
-      <div className='row match-bg'>
-        <Button variant="contained" className='button-hit' onClick={refreshPage}>
-          Restart
-        </Button>
-        <Button variant="contained" className='button-hit' onClick={round_start}>
-          Deal
-        </Button>
-      </div>
-
       <div className="container z-index-0 width-900">
           <div className="row">
-              <div className="col-2 col-options col-border-right">
-                  <div className="row row-header">
-                      <h6>Data Feed</h6>
-                  </div>
-              </div>
-              <div className="col-8 col-options col-border-right">
+              <div className="col-10 col-options col-border-right">
                   <div className="row row-header">
                       <h5>Smart Contract Blackjack</h5>
                   </div>
@@ -151,13 +136,18 @@ function App() {
                         </FormControl>
                       </Box>
                       <div className='row row-wager-btn'>
-                        <Button variant="contained" className="button-wager" id="wager-btn">
+                        <Button variant="contained" className="button-wager" id="wager-btn" onClick={round_start}>
                           Wager
                         </Button>
                       </div>
                       <div className='row row-balance'>
                         <div className='col-6 wallet-balance'>Balance:</div>
                         <div className='col-6 wallet-balance'>{balance} <img src={image} alt="Ethereum Symbol" className="ethLogo"/></div>
+                      </div>
+                      <div className='row continue-container'>
+                        <Button variant="contained" className='button-hit' onClick={refreshPage}>
+                          Continue
+                        </Button>
                       </div>
                   </div>
               </div>
