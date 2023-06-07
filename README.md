@@ -3,7 +3,7 @@
 > The House is a Smart Contract in this Blackjack dApp that utilizes 
 > Chainlink VRF for cryptograhically-guaranteed randomized deck shuffling.
 
-<< DEMO GIF WILL GO HERE (CENTERED) >>
+<p align="center"><img src="src/demo_gif.gif" alt="Demonstration .gif of the Application"></p>
 
 ## :file_folder: Table of Contents
 
@@ -57,13 +57,15 @@ Currently, we are working to overcome the challenge of obtaining a VRF response 
 ## 👋 Meet the Team
 
 <p align="center">
-  <a href="https://github.com/Andy-Waine"><img src="src/pfp-andy.png" width="200" alt="Dev Profile Picture: Andy" title="Andy Waine" />Andy Waine</a>
+  <a href="https://github.com/Andy-Waine"><img src="src/pfp-andy.png" width="200" alt="Dev Profile Picture: Andy" title="Andy Waine" /></a>
   <span>&nbsp; &nbsp; &nbsp;</span>
-  <a href="https://github.com/guha-rahul"><img src="src/pfp-rahul.png" width="200" alt="Dev Profile Picture: Rahul" title="Rahul Guha" />Rahul Guha</a>
+  <a href="https://github.com/guha-rahul"><img src="src/pfp-rahul.png" width="200" alt="Dev Profile Picture: Rahul" title="Rahul Guha" /></a>
 </p>
-
-
-Temporary: VRFID 2153
+<p align="center">
+  <a href="https://github.com/Andy-Waine">Andy Waine</a>
+  <span>&nbsp; &nbsp; &nbsp;</span>
+  <a href="https://github.com/guha-rahul">Rahul Guha</a>
+</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 

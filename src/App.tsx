@@ -61,7 +61,6 @@ function App() {
 
   return (
     <div className="app-root">
-      {/* New Game & Reload buttons for testing only, to be removed */}
       <div className="container z-index-0 width-900">
         <div className="row">
           <div className="col-9 col-options col-border-right">
@@ -177,34 +176,16 @@ function App() {
                   variant="contained"
                   className="button-wager"
                   id="wager-btn"
+                  onClick={round_start}
                 >
                   Wager
                 </Button>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="row match-bg">
-        <div className="col-3 dev-buttons">
-          <div className="row dev-buttons">
-            <div className="dev-btn-parent">
-              <Button
-                variant="contained"
-                className="button-hit"
-                onClick={refreshPage}
-              >
-                Restart
-              </Button>
-            </div>
-            <div className="dev-btn-parent">
-              <Button
-                variant="contained"
-                className="button-hit"
-                onClick={round_start}
-              >
-                Deal
-              </Button>
+              <div className='row continue-container'>
+                <Button variant="contained" className='button-hit' onClick={refreshPage}>
+                  Continue
+                </Button>
+              </div>
             </div>
           </div>
         </div>
