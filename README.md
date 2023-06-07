@@ -63,7 +63,7 @@ Currently, we are working to overcome the challenge of obtaining a VRF response 
 </p>
 <p align="center">
   <a href="https://github.com/Andy-Waine">Andy Waine</a>
-  <span>&nbsp; &nbsp; &nbsp;</span>
+  <span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>
   <a href="https://github.com/guha-rahul">Rahul Guha</a>
 </p>
 
