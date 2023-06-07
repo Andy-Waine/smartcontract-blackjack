@@ -23,7 +23,7 @@
 
 ## 💻 Technologies Used
 
--  [![chainlink]][chainlink-url]
+- [![chainlink]][chainlink-url]
 - [![React][react.js]][react-url]
 - [![solidity]][solidity-url]
 - [![web3.js]][web3.js-url]
@@ -36,7 +36,7 @@
  - Run `npm run start` to serve the application locally (localhost:3000)
  - If the application throws a build error on `main`, try the `demo` branch to test the game and the application's UI (see 'Challenge' below for more details): 
   
-#### :warning: Challenge :warning:
+#### 🧗‍ Challenge 🧗‍
 <p>
 Currently, we are working to overcome the challenge of obtaining a VRF response prior to dealing. When building locally on `main`, the most up-to-date logic for VRF shuffling throws a build error. We have provided a `demo` branch for game testing with hardcoded values in place of the response. This is our highest-priority item, but we will wait until the judging period for the Spring '23 Hackathon is over to continue work on this.
 </p>
@@ -53,18 +53,13 @@ Currently, we are working to overcome the challenge of obtaining a VRF response 
 
 <p align="center"><img src="src/vrf-shuffling.PNG" alt="Shuffling Process Visualization"></p>
 
-## 🧗‍♀️ Project Future
-
-> << A synopsis of the vision for the project moving forward >>
--  << detail challenges faced during development and the steps we anticipate taking to overcome them >>
--  << list some cool features we'd like to implement down the road >>
 
 ## 👋 Meet the Team
 
 <p align="center">
-  <a href="https://github.com/Andy-Waine"><img src="src/pfp-andy.png" width="200" alt="Dev Profile Picture: Andy" title="Andy Waine" /></a>
+  <a href="https://github.com/Andy-Waine"><img src="src/pfp-andy.png" width="200" alt="Dev Profile Picture: Andy" title="Andy Waine" />Andy Waine</a>
   <span>&nbsp; &nbsp; &nbsp;</span>
-  <a href="https://github.com/guha-rahul"><img src="src/pfp-rahul.png" width="200" alt="Dev Profile Picture: Rahul" title="Rahul Guha" /></a>
+  <a href="https://github.com/guha-rahul"><img src="src/pfp-rahul.png" width="200" alt="Dev Profile Picture: Rahul" title="Rahul Guha" />Rahul Guha</a>
 </p>
 
 
