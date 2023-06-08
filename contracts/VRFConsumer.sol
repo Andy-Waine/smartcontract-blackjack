@@ -1,6 +1,6 @@
 // // SPDX-License-Identifier: MIT
 // // An example of a consumer contract that relies on a subscription for funding.
-// pragma solidity ^0.8.19;
+// pragma solidity 0.8.19;
 
 // import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 // import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
@@ -35,7 +35,7 @@
 //     // For a list of available gas lanes on each network,
 //     // see https://docs.chain.link/docs/vrf/v2/subscription/supported-networks/#configurations
 //     bytes32 keyHash =
-//         0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c;
+//         0x4b09e658ed251bcafeebbc69400383d49f344ace09b9576fe248bb02c003fe9f;
 
 //     // Depends on the number of requested values that you want sent to the
 //     // fulfillRandomWords() function. Storing each word costs about 20,000 gas,
@@ -59,11 +59,11 @@
 //     constructor(
 //         uint64 subscriptionId
 //     )
-//         VRFConsumerBaseV2(0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625)
+//         VRFConsumerBaseV2(0x7a1BaC17Ccc5b313516C5E16fb24f7659aA5ebed)
 //         ConfirmedOwner(msg.sender)
 //     {
 //         COORDINATOR = VRFCoordinatorV2Interface(
-//             0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625
+//             0x7a1BaC17Ccc5b313516C5E16fb24f7659aA5ebed
 //         );
 //         s_subscriptionId = subscriptionId;
 //     }
