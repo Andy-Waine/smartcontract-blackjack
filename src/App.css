@@ -6,8 +6,7 @@
 @import "https://unpkg.com/@material-ui/core@latest/umd/material-ui.min.css";
 
 /* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100&display=swap");
 
 /* 
 COLORS
@@ -19,312 +18,313 @@ COLORS
 */
 
 html {
-    background-color: #DFE7FB; /* Lavender (background) */
+  background-color: #dfe7fb; /* Lavender (background) */
 }
 
 * {
-    font-family: 'Montserrat', sans-serif;
-    color: #1a2b6b; /* Biscay (Text) */
+  font-family: "Montserrat", sans-serif;
+  color: #1a2b6b; /* Biscay (Text) */
 }
 
 .match-bg {
-    background-color: #DFE7FB !important; /* Lavender (background) */
+  background-color: #dfe7fb !important; /* Lavender (background) */
 }
 
 .container {
-    padding: 15px;
-    border-radius: 10px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    min-width: 750px;
-    min-height: 400px;
-    max-height: 400px;
-    height: 55%;
-    background-color: white;
-    margin: auto;
-    box-shadow: 0px 0px 5px rgba(160,179,242,.8); /* Perano (borders) */
+  padding: 15px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-width: 750px;
+  min-height: 400px;
+  max-height: 400px;
+  height: 55%;
+  background-color: white;
+  margin: auto;
+  box-shadow: 0px 0px 5px rgba(160, 179, 242, 0.8); /* Perano (borders) */
 }
 .row {
-    margin: 0;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: white;
+  margin: 0;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
 }
 
 .col-options {
-    background-color: white;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    padding-left: 6px;
-    padding-right: 6px;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 
 .col-border-right {
-    border-right: 1px solid #a0b3f2; /* Perano (borders) */
+  border-right: 1px solid #a0b3f2; /* Perano (borders) */
 }
 
-.col-dealer-hand{
-    margin-top: 10px;
+.col-dealer-hand {
+  margin-top: 10px;
 }
 
 .col-hand {
-    max-width: fit-content;
-    display: flex;
+  max-width: fit-content;
+  display: flex;
 }
 
 .data-feed-col {
-    visibility: hidden;
-    background-color: #a0b3f2; /* Perano (borders) */
-    z-index: 100;
+  visibility: hidden;
+  background-color: #a0b3f2; /* Perano (borders) */
+  z-index: 100;
 }
 
 .wallet-balance {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 14px;
-    align-items: center;
-    justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
 }
 
 .row-header {
-    min-width: 100%;
-    max-height: 10%;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 10px;
+  min-width: 100%;
+  max-height: 10%;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
 }
 
 .row-body {
-    min-width: 100%;
-    max-height: 50%;
-    justify-content: center;
-    align-items: center;
+  min-width: 100%;
+  max-height: 50%;
+  justify-content: center;
+  align-items: center;
 }
 
 .row-footer {
-    min-width: 100%;
-    max-height: 40%;
-    justify-content: center;
-    align-items: center;
+  min-width: 100%;
+  max-height: 40%;
+  justify-content: center;
+  align-items: center;
 }
 
 .row-dealer-hand {
-    background-color: transparent;
-    border-bottom-left-radius: 50%;
-    border-bottom-right-radius: 50%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    height: 80%;
-    width: 100%;
-    clip-path: polygon(10 0, 100% 0, 100% 50%, 0 100%);
-    box-shadow: 0px 0px 10px rgba(55,91,210,1) inset; /* CLBLUE */
-    justify-content: center;
+  background-color: transparent;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 80%;
+  width: 100%;
+  clip-path: polygon(10 0, 100% 0, 100% 50%, 0 100%);
+  box-shadow: 0px 0px 10px rgba(55, 91, 210, 1) inset; /* CLBLUE */
+  justify-content: center;
 }
 
 .row-dealer-hand-fill {
-    background-color: #DFE7FB;   /* Lavender (background) */
-    border-bottom-left-radius: 50%;
-    border-bottom-right-radius: 50%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    height: 100%;
-    width: 100%;
-    opacity: 80%;
-    display: flex;
-    justify-content: center;
+  background-color: #dfe7fb; /* Lavender (background) */
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 100%;
+  width: 100%;
+  opacity: 80%;
+  display: flex;
+  justify-content: center;
 }
 
 .row-player-hand {
-    background-color: transparent;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(55,91,210,1) inset; /* CLBLUE */
-    height: 80%;
-    justify-content: center;
+  background-color: transparent;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(55, 91, 210, 1) inset; /* CLBLUE */
+  height: 80%;
+  justify-content: center;
 }
 
 .row-player-hand-fill {
-    background-color: #DFE7FB;   /* Lavender (background) */
-    border-radius: 10px;
-    height: 100%;
-    width: 100%;
-    opacity: 80%;
-    display: flex;
-    justify-content: center;
+  background-color: #dfe7fb; /* Lavender (background) */
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  opacity: 80%;
+  display: flex;
+  justify-content: center;
 }
 
 .your-hand {
-    position: absolute;
-    top: -15px;
-    left: 15px;
-    font-weight: 300;
-    font-size: 12px;
-    padding: 0px;
+  position: absolute;
+  top: -15px;
+  left: 15px;
+  font-weight: 300;
+  font-size: 12px;
+  padding: 0px;
 }
 
 .game-result {
-    position: absolute;
-    top: -15px;
-    right: 15px;
-    font-weight: 500;
-    font-size: 12px;
-    padding: 0px;
-    color: #ff5e57;
+  position: absolute;
+  top: -15px;
+  right: 15px;
+  font-weight: 500;
+  font-size: 12px;
+  padding: 0px;
+  color: #ff5e57;
 }
 
 .row-player-choices {
-    height: 20%;
-    position: relative;
+  height: 20%;
+  position: relative;
 }
 
 .row-wager-btn {
-    padding-left: 30px;
-    padding-top: 5px;
-    justify-content: center;
-    height: fit-content;
+  padding-left: 30px;
+  padding-top: 5px;
+  justify-content: center;
+  height: fit-content;
 }
 
 .continue-container {
-    padding-top: 165px;
-    align-items: center;
-    justify-content: center;
-    padding-left: 8px;
+  padding-top: 165px;
+  align-items: center;
+  justify-content: center;
+  padding-left: 8px;
 }
 
 .row-balance {
-    padding-left: 76px;
-    justify-content: center;
+  padding-left: 76px;
+  justify-content: center;
 }
 
 .col-choice-button {
-    top: -50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
+  top: -50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
 }
 
 .dev-buttons {
-    position: absolute;
-    bottom: 20px;
-    right: 0;
-    padding-top: 2px;
-    background-color: transparent;
+  position: absolute;
+  bottom: 20px;
+  right: 0;
+  padding-top: 2px;
+  background-color: transparent;
 }
 
 .dev-btn-parent {
-    padding-left: 4px;
+  padding-left: 4px;
 }
 
 .button-hit {
-    width: 100px;
-    background-color: #375BD2 !important;
+  width: 100px;
+  background-color: #375bd2 !important;
 }
 
 .button-stand {
-    width: 100px;
-    background-color: white !important;
-    border: 1px solid #375BD2 !important;
-    color: #375BD2 !important;
+  width: 100px;
+  background-color: white !important;
+  border: 1px solid #375bd2 !important;
+  color: #375bd2 !important;
 }
 
 .button-wager {
-    width: 100px;
-    background-color: #ff5e57 !important;
+  width: 100px;
+  background-color: #ff5e57 !important;
 }
 
 .player-card {
-    width: 80px;
-    min-width: 80px;
-    height: 130px;
-    background-color: white;
-    box-shadow: 0px 0px 10px rgba(55,91,210,.3);
-    border: 1px solid #a0b3f2;
-    border-radius: 10px;
-    margin: 5px;
-    float: left;
-    z-index: 1;
-    margin-top: 5px;
-    padding-left: 5px;
-    position: relative;
-    font-weight: 600;
-    font-size: 16px;
+  width: 80px;
+  min-width: 80px;
+  height: 130px;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(55, 91, 210, 0.3);
+  border: 1px solid #a0b3f2;
+  border-radius: 10px;
+  margin: 5px;
+  float: left;
+  z-index: 1;
+  margin-top: 5px;
+  padding-left: 5px;
+  position: relative;
+  font-weight: 600;
+  font-size: 16px;
 }
 
 .dealer-card {
-    width: 48px;
-    min-width: 48px;
-    height: 78px;
-    background-color: white;
-    box-shadow: 0px 0px 10px rgba(55,91,210,.3);
-    border: 1px solid #a0b3f2;
-    border-radius: 10px;
-    margin: 5px;
-    float: left;
-    z-index: 1;
-    margin-top: 5px;
-    padding-left: 5px;
-    position: relative;
-    font-weight: 600;
-    font-size: 14px;
+  width: 48px;
+  min-width: 48px;
+  height: 78px;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(55, 91, 210, 0.3);
+  border: 1px solid #a0b3f2;
+  border-radius: 10px;
+  margin: 5px;
+  float: left;
+  z-index: 1;
+  margin-top: 5px;
+  padding-left: 5px;
+  position: relative;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 .ethLogoMain {
-    position: absolute;
-    padding-left: 1px;
-    right: 7px;
-    background-color: transparent;
-    height: 20px;
+  position: absolute;
+  padding-left: 1px;
+  right: 7px;
+  background-color: transparent;
+  height: 20px;
 }
 
 .ethLogo {
-    position: absolute;
-    top: 13px;
-    padding-left: 3px;
-    background-color: transparent;
-    height: 14px;
+  position: absolute;
+  top: 13px;
+  padding-left: 3px;
+  background-color: transparent;
+  height: 14px;
 }
 
 .z-index-neg-10 {
-    z-index: -10;
+  z-index: -10;
 }
 
 .z-index-neg-1 {
-    z-index: -1;
+  z-index: -1;
 }
 
 .z-index-0 {
-    z-index: 0;  /* Main Table */
+  z-index: 0; /* Main Table */
 }
 
 .z-index-1 {
-    z-index: 1;
+  z-index: 1;
 }
 
 .z-index-10 {
-    z-index: 10;
+  z-index: 10;
 }
 
-
 .width-340 {
-    max-width: 340px;
-    min-width: 340px;
+  max-width: 340px;
+  min-width: 340px;
 }
 
 .width-900 {
-    max-width: 900px;
-    min-width: 900px;
+  max-width: 900px;
+  min-width: 900px;
 }
 
 /* removes black border that appears after MUI buttons are clicked */
-button:focus { outline: none !important;;}
+button:focus {
+  outline: none !important;
+}
