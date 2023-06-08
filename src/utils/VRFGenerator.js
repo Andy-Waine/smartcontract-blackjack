@@ -21,8 +21,9 @@ export const GetRandomNumber = async () => {
     await tx.wait(10);
     const _randnumber = await contract.getRequestStatus(_lastRequestId);
     const rand = _randnumber[1].toString();
-    console.log(_randnumber[1]);
-    console.log(rand);
+    return rand;
+    // console.log(_randnumber[1]);
+    // console.log(rand);
     // let timeTaken = Date.now() - start;
     // console.log("Total time taken : " + timeTaken + " milliseconds");
   } catch (err) {

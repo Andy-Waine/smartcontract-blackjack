@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-// import Web3 from "web3";
+import Web3 from "web3";
 import { GetRandomNumber } from "./utils/VRFGenerator"; // changed
 import "./App.css";
 import {
@@ -113,21 +113,21 @@ function App() {
   console.log("remainderTest: ", remainderTest);
   // Create a reference to the Web3 Modal (used for connecting to Metamask) which persists as long as the page is open
 
-  // useEffect(() => {
-  //   const getMetamaskBalance = async () => {
-  //     const web3 = new Web3((window as any).ethereum);
-  //     const accounts = await (window as any).ethereum.enable();
-  //     const balanceString: string = await web3.eth.getBalance(accounts[0]);
-  //     // transform wei to ether, transform balanceString to number, set balance
-  //     const balanceUnformatted = Number(
-  //       web3.utils.fromWei(balanceString, "ether")
-  //     );
-  //     // fix balance to three decimal places without rounding
-  //     const balance = Math.floor(balanceUnformatted * 1000) / 1000;
-  //     setBalance(balance);
-  //   };
-  //   getMetamaskBalance();
-  // }, []);
+  useEffect(() => {
+    const getMetamaskBalance = async () => {
+      const web3 = new Web3((window as any).ethereum);
+      const accounts = await (window as any).ethereum.enable();
+      const balanceString: string = await web3.eth.getBalance(accounts[0]);
+      // transform wei to ether, transform balanceString to number, set balance
+      const balanceUnformatted = Number(
+        web3.utils.fromWei(balanceString, "ether")
+      );
+      // fix balance to three decimal places without rounding
+      const balance = Math.floor(balanceUnformatted * 1000) / 1000;
+      setBalance(balance);
+    };
+    getMetamaskBalance();
+  }, []);
 
   return (
     <div className="app-root">
@@ -251,8 +251,12 @@ function App() {
                   Wager
                 </Button>
               </div>
-              <div className='row continue-container'>
-                <Button variant="contained" className='button-hit' onClick={refreshPage}>
+              <div className="row continue-container">
+                <Button
+                  variant="contained"
+                  className="button-hit"
+                  onClick={refreshPage}
+                >
                   Continue
                 </Button>
               </div>
@@ -260,7 +264,7 @@ function App() {
           </div>
         </div>
       </div>
-      <div>
+      <div className="wallet-button">
         <WagmiConfig client={client}>
           <RainbowKitProvider chains={chains}>
             <ConnectButton />
@@ -276,13 +280,13 @@ async function round_start() {
   localStorage.clear();
 
   //NEED: Which value are we passing into provider?
-  vrfResult = async () => {
+  const vrfResult = async () => {
     // changed
     const _vrfResult: any = await GetRandomNumber();
     console.log("VRF Result: ", _vrfResult);
     return _vrfResult;
   };
-
+  vrfResult();
   // reset round result
   round_result = ""; // 'Win' || 'Blackjack' || 'Loss' || 'Push'
 
