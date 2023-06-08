@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import Web3 from "web3";
+// import Web3 from "web3";
 import { GetRandomNumber } from "./utils/VRFGenerator"; // changed
 import "./App.css";
 import {
@@ -12,24 +12,77 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import image from "./eth-symbol.png";
+//Wallet imports
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import "@rainbow-me/rainbowkit/styles.css";
 
-    
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
+import {
+  mainnet,
+  polygon,
+  optimism,
+  arbitrum,
+  polygonMumbai,
+} from "wagmi/chains";
+// import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { publicProvider } from "wagmi/providers/public";
+
 //  deck of cards
-//  \u{2660} = ♠, \u{2666} = ♦, \u{2663} = ♧, \u{2665} = ♡ 
+//  \u{2660} = ♠, \u{2666} = ♦, \u{2663} = ♧, \u{2665} = ♡
 var deck: string[] = [
-  "A\u{2660}", "A\u{2666}", "A\u{2663}", "A\u{2665}",
-  "K\u{2660}", "K\u{2666}", "K\u{2663}", "K\u{2665}",
-  "Q\u{2660}", "Q\u{2666}", "Q\u{2663}", "Q\u{2665}",
-  "J\u{2660}", "J\u{2666}", "J\u{2663}", "J\u{2665}",
-  "10\u{2660}", "10\u{2666}", "10\u{2663}", "10\u{2665}",
-  "9\u{2660}", "9\u{2666}", "9\u{2663}", "9\u{2665}",
-  "8\u{2660}", "8\u{2666}", "8\u{2663}", "8\u{2665}",
-  "7\u{2660}", "7\u{2666}", "7\u{2663}", "7\u{2665}",
-  "6\u{2660}", "6\u{2666}", "6\u{2663}", "6\u{2665}",
-  "5\u{2660}", "5\u{2666}", "5\u{2663}", "5\u{2665}",
-  "4\u{2660}", "4\u{2666}", "4\u{2663}", "4\u{2665}",
-  "3\u{2660}", "3\u{2666}", "3\u{2663}", "3\u{2665}",
-  "2\u{2660}", "2\u{2666}", "2\u{2663}", "2\u{2665}",
+  "A\u{2660}",
+  "A\u{2666}",
+  "A\u{2663}",
+  "A\u{2665}",
+  "K\u{2660}",
+  "K\u{2666}",
+  "K\u{2663}",
+  "K\u{2665}",
+  "Q\u{2660}",
+  "Q\u{2666}",
+  "Q\u{2663}",
+  "Q\u{2665}",
+  "J\u{2660}",
+  "J\u{2666}",
+  "J\u{2663}",
+  "J\u{2665}",
+  "10\u{2660}",
+  "10\u{2666}",
+  "10\u{2663}",
+  "10\u{2665}",
+  "9\u{2660}",
+  "9\u{2666}",
+  "9\u{2663}",
+  "9\u{2665}",
+  "8\u{2660}",
+  "8\u{2666}",
+  "8\u{2663}",
+  "8\u{2665}",
+  "7\u{2660}",
+  "7\u{2666}",
+  "7\u{2663}",
+  "7\u{2665}",
+  "6\u{2660}",
+  "6\u{2666}",
+  "6\u{2663}",
+  "6\u{2665}",
+  "5\u{2660}",
+  "5\u{2666}",
+  "5\u{2663}",
+  "5\u{2665}",
+  "4\u{2660}",
+  "4\u{2666}",
+  "4\u{2663}",
+  "4\u{2665}",
+  "3\u{2660}",
+  "3\u{2666}",
+  "3\u{2663}",
+  "3\u{2665}",
+  "2\u{2660}",
+  "2\u{2666}",
+  "2\u{2663}",
+  "2\u{2665}",
 ];
 
 var round_result: String = ""; // 'Win' || 'Blackjack' || 'Loss' || 'Push'
@@ -37,27 +90,44 @@ var player_hand: string[] = [];
 var dealer_hand: string[] = [];
 
 var vrfResult: any = 0; // placeholder until VRF request is made in round_start
-
+//wallet config
+const { chains, provider } = configureChains(
+  [polygonMumbai],
+  [publicProvider()]
+);
+const { connectors } = getDefaultWallets({
+  appName: "blackjack ",
+  chains,
+});
+const client = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+});
 function App() {
   const [balance, setBalance] = useState(0);
+  // walletConnected keep track of whether the user's wallet is connected or not
+  const [walletConnected, setWalletConnected] = useState(false);
+
   const remainderTest = Remainder(5793753837429717, 50);
   console.log("remainderTest: ", remainderTest);
+  // Create a reference to the Web3 Modal (used for connecting to Metamask) which persists as long as the page is open
 
-  useEffect(() => {
-    const getMetamaskBalance = async () => {
-      const web3 = new Web3((window as any).ethereum);
-      const accounts = await (window as any).ethereum.enable();
-      const balanceString: string = await web3.eth.getBalance(accounts[0]);
-      // transform wei to ether, transform balanceString to number, set balance
-      const balanceUnformatted = Number(
-        web3.utils.fromWei(balanceString, "ether")
-      );
-      // fix balance to three decimal places without rounding
-      const balance = Math.floor(balanceUnformatted * 1000) / 1000;
-      setBalance(balance);
-    };
-    getMetamaskBalance();
-  }, []);
+  // useEffect(() => {
+  //   const getMetamaskBalance = async () => {
+  //     const web3 = new Web3((window as any).ethereum);
+  //     const accounts = await (window as any).ethereum.enable();
+  //     const balanceString: string = await web3.eth.getBalance(accounts[0]);
+  //     // transform wei to ether, transform balanceString to number, set balance
+  //     const balanceUnformatted = Number(
+  //       web3.utils.fromWei(balanceString, "ether")
+  //     );
+  //     // fix balance to three decimal places without rounding
+  //     const balance = Math.floor(balanceUnformatted * 1000) / 1000;
+  //     setBalance(balance);
+  //   };
+  //   getMetamaskBalance();
+  // }, []);
 
   return (
     <div className="app-root">
@@ -190,6 +260,13 @@ function App() {
           </div>
         </div>
       </div>
+      <div>
+        <WagmiConfig client={client}>
+          <RainbowKitProvider chains={chains}>
+            <ConnectButton />
+          </RainbowKitProvider>
+        </WagmiConfig>
+      </div>
     </div>
   );
 }
@@ -197,13 +274,13 @@ function App() {
 async function round_start() {
   // clear local storage
   localStorage.clear();
-  
+
   //NEED: Which value are we passing into provider?
-  vrfResult = async (provider: any) => {
+  vrfResult = async () => {
     // changed
     const _vrfResult: any = await GetRandomNumber();
     console.log("VRF Result: ", _vrfResult);
-    return _vrfResult
+    return _vrfResult;
   };
 
   // reset round result
@@ -292,7 +369,7 @@ async function deal() {
 
   // Randomized Selection Provided by Chainlink VRF
   let card_1_int = Remainder(vrfResult, deck.length); // uses remainder int of (vrfResult mod #cardsInDeck) to select card from deck
-  let card_1: string = deck.splice(card_1_int, 1)[0];  // card is removed from deck
+  let card_1: string = deck.splice(card_1_int, 1)[0]; // card is removed from deck
 
   let dealer_card_1_int = Remainder(vrfResult, deck.length);
   let dealer_card_1: string = deck.splice(dealer_card_1_int, 1)[0];
@@ -302,7 +379,7 @@ async function deal() {
 
   let dealer_card_2_int = Remainder(vrfResult, deck.length);
   let dealer_card_2: string = deck.splice(dealer_card_2_int, 1)[0];
-  
+
   player_hand = [card_1.toString(), card_2.toString()]; // compounds cards into 'hand' array
   await generatePlayerDraw(player_hand); // generates player hand on screen
 
@@ -539,7 +616,7 @@ async function dealersTurn(dealerHand: string[], player_status: string) {
   let dealer_status: string;
   while (dealer_score <= 16) {
     let dealerDraw_int = Remainder(vrfResult, deck.length); // uses remainder int of (vrfResult mod #cardsInDeck) to select card from deck
-    let dealerDraw: string = deck.splice(dealerDraw_int ,1)[0]; // card is removed from deck
+    let dealerDraw: string = deck.splice(dealerDraw_int, 1)[0]; // card is removed from deck
     console.log("The Dealer draws another card: ", dealerDraw);
     dealerHand.push(dealerDraw.toString());
     await generateDealerDraw(dealerHand, player_status); // update dealer's hand UI
