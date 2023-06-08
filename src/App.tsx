@@ -109,10 +109,8 @@ function App() {
   // walletConnected keep track of whether the user's wallet is connected or not
   const [walletConnected, setWalletConnected] = useState(false);
 
-  const remainderTest = Remainder(5793753837429717, 50);
-  console.log("remainderTest: ", remainderTest);
-  // Create a reference to the Web3 Modal (used for connecting to Metamask) which persists as long as the page is open
 
+  // Create a reference to the Web3 Modal (used for connecting to Metamask) which persists as long as the page is open
   useEffect(() => {
     const getMetamaskBalance = async () => {
       const web3 = new Web3((window as any).ethereum);
