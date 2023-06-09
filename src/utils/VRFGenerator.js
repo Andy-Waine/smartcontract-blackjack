@@ -16,9 +16,9 @@ export const GetRandomNumber = async () => {
   try {
     const contract = new ethers.Contract(VrfConsumerContract, abi, provider);
     const contractSigner = contract.connect(wallet);
-    const tx = await contractSigner.requestRandomWords({ gasLimit: 300000 });
+    const tx = await contractSigner.requestRandomWords();
     const _lastRequestId = await contract.lastRequestId();
-    await tx.wait(10);
+    await tx.wait();
     const _randnumber = await contract.getRequestStatus(_lastRequestId);
     const rand = _randnumber[1].toString();
     return rand;
